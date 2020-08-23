@@ -64,7 +64,7 @@
         <scene sceneID="Pmr-bg-fjT">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6oo-lx-YdQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <navigationController modalPresentationStyle="fullScreen" id="CIm-L5-FSF" sceneMemberID="viewController">
+                <navigationController id="CIm-L5-FSF" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="pdn-X2-OIB"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CMG-gJ-5Ak">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
@@ -77,12 +77,12 @@
             </objects>
             <point key="canvasLocation" x="-152" y="142"/>
         </scene>
-        <!--Item-->
+        <!--Друзья-->
         <scene sceneID="fWL-Z7-scb">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KSE-Vh-nvu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tableViewController modalPresentationStyle="fullScreen" id="ahN-N2-FPV" customClass="MyFriendsViewController" customModule="vk" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="fAX-5c-Nec">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="fAX-5c-Nec">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -153,7 +153,7 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Item" id="tZg-cw-780"/>
-                    <navigationItem key="navigationItem" id="wk5-Hw-I8f"/>
+                    <navigationItem key="navigationItem" title="Друзья" id="wk5-Hw-I8f"/>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="829" y="143"/>
