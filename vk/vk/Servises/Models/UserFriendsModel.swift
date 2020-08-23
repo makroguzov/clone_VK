@@ -16,7 +16,7 @@ class UserFriendsModel: Object, Decodable {
     }
 
     @objc dynamic var count: Int
-    let users = List<UserModel>()
+    let users : [UserModel]//List<UserModel>()
 }
 
 //struct UserFriendsModel: Decodable {
