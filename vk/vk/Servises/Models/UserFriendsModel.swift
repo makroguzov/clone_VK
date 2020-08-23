@@ -7,19 +7,30 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct UserFriendsModel: Decodable {
-    let response: Response
-}
-
-extension UserFriendsModel {
-    struct Response: Decodable {
-        enum CodingKeys: String, CodingKey {
-            case users = "items"
-            case count
-        }
-
-        let count: Int
-        let users: [UserModel]
+class UserFriendsModel: Object, Decodable {
+    enum CodingKeys: String, CodingKey {
+        case users = "items"
+        case count
     }
+
+    @objc dynamic var count: Int
+    let users = List<UserModel>()
 }
+
+//struct UserFriendsModel: Decodable {
+//    let response: Response
+//}
+//
+//extension UserFriendsModel {
+//    struct Response: Decodable {
+//        enum CodingKeys: String, CodingKey {
+//            case users = "items"
+//            case count
+//        }
+//
+//        let count: Int
+//        let users: [UserModel]
+//    }
+//}

@@ -33,6 +33,7 @@
 		63D1C90524F2EB1800F39111 /* GroupInvitationCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D1C90424F2EB1800F39111 /* GroupInvitationCellModel.swift */; };
 		63D1C90F24F303A700F39111 /* GroupHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D1C90E24F303A700F39111 /* GroupHeader.swift */; };
 		63D1C91324F3041C00F39111 /* MyFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D1C91224F3041C00F39111 /* MyFriendsViewController.swift */; };
+		63D1C91724F306E800F39111 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D1C91624F306E800F39111 /* City.swift */; };
 		BC28170EAFBB81061F15D701 /* Pods_vk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C12623064DD68FBD8A28EAA /* Pods_vk.framework */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +87,7 @@
 		63D1C90424F2EB1800F39111 /* GroupInvitationCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInvitationCellModel.swift; sourceTree = "<group>"; };
 		63D1C90E24F303A700F39111 /* GroupHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupHeader.swift; path = ../../../../../../../.Trash/cellsDescriptions/CellsHeaders/GroupHeader.swift; sourceTree = "<group>"; };
 		63D1C91224F3041C00F39111 /* MyFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyFriendsViewController.swift; path = ../../../../../.Trash/MyFriendsViewController.swift; sourceTree = "<group>"; };
+		63D1C91624F306E800F39111 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		6C12623064DD68FBD8A28EAA /* Pods_vk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92215BA8DDCA045A64D86C4E /* Pods-vk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vk.release.xcconfig"; path = "Target Support Files/Pods-vk/Pods-vk.release.xcconfig"; sourceTree = "<group>"; };
 		B73DD68D31133B58F1721102 /* Pods-vk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vk.debug.xcconfig"; path = "Target Support Files/Pods-vk/Pods-vk.debug.xcconfig"; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 			children = (
 				63D1C8E724F2E8AD00F39111 /* UserFriendsModel.swift */,
 				63D1C8E924F2E8DA00F39111 /* UserModel.swift */,
+				63D1C91624F306E800F39111 /* City.swift */,
 				63D1C8EB24F2E8FD00F39111 /* UserGroupsModel.swift */,
 				63D1C8ED24F2E92400F39111 /* UserGroupInvitationModel.swift */,
 				63D1C8EF24F2E94300F39111 /* GroupModel.swift */,
@@ -450,6 +453,7 @@
 				63D1C8DA24F2E6D600F39111 /* Session.swift in Sources */,
 				63D1C8EA24F2E8DA00F39111 /* UserModel.swift in Sources */,
 				63D1C8EC24F2E8FD00F39111 /* UserGroupsModel.swift in Sources */,
+				63D1C91724F306E800F39111 /* City.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
