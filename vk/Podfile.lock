@@ -11,7 +11,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
-  - RealmSwift
+  - RealmSwift (~> 5.3.5)
   - SDWebImage (~> 5.8.4)
 
 SPEC REPOS:
@@ -27,6 +27,6 @@ SPEC CHECKSUMS:
   RealmSwift: a6ea2ea561039fc3833c08dec81371a9a3bb5ca6
   SDWebImage: cf6922231e95550934da2ada0f20f2becf2ceba9
 
-PODFILE CHECKSUM: 828c7ee9c1dd3c45e666d1e6065322eeb7b33103
+PODFILE CHECKSUM: 1108992a17214c1615ee6d9be75a7b4fbdd93514
 
 COCOAPODS: 1.9.3

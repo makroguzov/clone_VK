@@ -9,14 +9,14 @@
 import Foundation
 import RealmSwift
 
-class UserModel: Object, Decodable {
+class UserModel: Object, Codable {
     @objc dynamic var id: Int
 
     @objc dynamic var firstName: String
     @objc dynamic var lastName: String
 
-//    let canAccessClosed = RealmOptional<Bool>()
-//    let isClosed = RealmOptional<Bool>()
+    let canAccessClosed = RealmOptional<Bool>()
+    let isClosed = RealmOptional<Bool>()
 
     @objc dynamic var deactivated: String?
 
@@ -35,8 +35,8 @@ extension UserModel {
         case id
         case firstName = "first_name"
         case lastName = "last_name"
-//        case canAccessClosed = "can_access_closed"
-//        case isClosed = "is_closed"
+        case canAccessClosed = "can_access_closed"
+        case isClosed = "is_closed"
         case deactivated
         case bdate
         case city
