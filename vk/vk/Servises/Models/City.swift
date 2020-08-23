@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class City:  Object, Decodable {
+class City: Object, Decodable {
     @objc dynamic var id: Int
     @objc dynamic var title: String
 }

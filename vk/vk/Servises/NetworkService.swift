@@ -109,11 +109,11 @@ class NetworkService {
         ]
 
         NetworkService.session.request(baseUrl + path, method: .get, parameters: params).responseDecodable() {
-            (response: DataResponse<UserFriendsModel, AFError>) in
+            (response: DataResponse<Response<UserFriendsModel>, AFError>) in
             
             switch response.result {
-            case .success(let userFriendsModel):
-                complition(userFriendsModel)
+            case .success(let result):
+                complition(result.response)
             case .failure(let error):
                 print(error.localizedDescription)
             }
