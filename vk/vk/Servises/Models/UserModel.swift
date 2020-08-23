@@ -15,8 +15,8 @@ class UserModel: Object, Codable {
     @objc dynamic var firstName: String
     @objc dynamic var lastName: String
 
-    let canAccessClosed = RealmOptional<Bool>()
-    let isClosed = RealmOptional<Bool>()
+    var canAccessClosed = RealmOptional<Bool>()
+    var isClosed = RealmOptional<Bool>()
 
     @objc dynamic var deactivated: String?
 

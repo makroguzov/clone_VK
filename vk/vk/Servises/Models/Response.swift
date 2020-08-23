@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct Response<T: Codable>: Codable {
+class Response<T: Codable>: Codable {
     let response: T
 }
