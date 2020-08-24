@@ -10,6 +10,21 @@ import Foundation
 import RealmSwift
 
 class UserModel: Object, Codable {
+    enum CodingKeys: String, CodingKey {
+        case id
+        case firstName = "first_name"
+        case lastName = "last_name"
+        case canAccessClosed = "can_access_closed"
+        case isClosed = "is_closed"
+        case deactivated
+        case bdate
+        case city
+        case photo100 = "photo_100"
+        case photo200 = "photo_200"
+        case photo50 = "photo_50"
+        case photoOrig = "photo_200_orig"
+    }
+
     @objc dynamic var id: Int
 
     @objc dynamic var firstName: String
@@ -27,24 +42,6 @@ class UserModel: Object, Codable {
     @objc dynamic var photo200: String?
     @objc dynamic var photo50: String?
     @objc dynamic var photoOrig: String?
-}
-
-
-extension UserModel {
-    enum CodingKeys: String, CodingKey {
-        case id
-        case firstName = "first_name"
-        case lastName = "last_name"
-        case canAccessClosed = "can_access_closed"
-        case isClosed = "is_closed"
-        case deactivated
-        case bdate
-        case city
-        case photo100 = "photo_100"
-        case photo200 = "photo_200"
-        case photo50 = "photo_50"
-        case photoOrig = "photo_200_orig"
-    }
 }
 
 //struct UserModel: Decodable {

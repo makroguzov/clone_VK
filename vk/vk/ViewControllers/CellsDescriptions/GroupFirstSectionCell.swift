@@ -35,19 +35,21 @@ class GroupFirstSectionCell: UITableViewCell {
     }
     
     private lazy var customAccessoryView: UIButton = {
-        let image = UIImage(systemName: "message", withConfiguration: UIImage.SymbolConfiguration(weight: .regular))?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal)
-
         let button = UIButton()
-        button.setImage(image, for: .normal)
-        //button.addTarget(self, action: #selector(messageButtonAction(_:)), for: .touchUpInside)
+        
+        button.layer.cornerRadius = button.frame.width / 2
+        button.backgroundColor = .lightGray
+        
+        button.setTitle("52", for: .normal)
+        button.setTitleColor(.white, for: .normal)
         
         button.sizeToFit()
         return button
     }()
     
-    override class func awakeFromNib() {
+    override func awakeFromNib() {
         super.awakeFromNib()
-
-        //accessoryView = customAccessoryView
+        
+        accessoryView = customAccessoryView
     }
 }
