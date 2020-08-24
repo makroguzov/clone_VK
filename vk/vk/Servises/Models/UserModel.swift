@@ -15,7 +15,7 @@ class UserModel: Object, Codable {
         case firstName = "first_name"
         case lastName = "last_name"
         case canAccessClosed = "can_access_closed"
-//        case isClosed = "is_closed"
+        case isClosed = "is_closed"
         case deactivated
         case bdate
         case city
