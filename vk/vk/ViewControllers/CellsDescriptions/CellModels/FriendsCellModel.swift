@@ -23,7 +23,7 @@ struct FriendsCellModel {
     }()
 
     
-    init(image: String?, name: String, surename: String, bdate: String?, city: UserModel.City?) {
+    init(image: String?, name: String, surename: String, bdate: String?, city: City?) {
         self.imageUrl = URL(string: image ?? "")
         self.name = "\(name) \(surename)"
         self.subtitle = "\(bdate ?? "")"
