@@ -15,7 +15,7 @@ class UserFriendsModel: Object, Codable {
         case count
     }
 
-    @objc dynamic var count: Int
+    @objc dynamic var count: Int = 0
     var users = List<UserModel>() 
 }
 

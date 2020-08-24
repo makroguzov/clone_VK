@@ -25,10 +25,10 @@ class UserModel: Object, Codable {
         case photoOrig = "photo_200_orig"
     }
 
-    @objc dynamic var id: Int
+    @objc dynamic var id: Int = 0
 
-    @objc dynamic var firstName: String
-    @objc dynamic var lastName: String
+    @objc dynamic var firstName: String = ""
+    @objc dynamic var lastName: String = ""
 
     var canAccessClosed = RealmOptional<Bool>()
     var isClosed = RealmOptional<Bool>()
