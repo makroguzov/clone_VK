@@ -15,7 +15,7 @@ class UserModel: Object, Codable {
         case firstName = "first_name"
         case lastName = "last_name"
         case canAccessClosed = "can_access_closed"
-        case isClosed = "is_closed"
+//        case isClosed = "is_closed"
         case deactivated
         case bdate
         case city
@@ -30,8 +30,8 @@ class UserModel: Object, Codable {
     @objc dynamic var firstName: String = ""
     @objc dynamic var lastName: String = ""
 
-    var canAccessClosed = RealmOptional<Bool>()
-    var isClosed = RealmOptional<Bool>()
+    let canAccessClosed = RealmOptional<Bool>()
+    let isClosed = RealmOptional<Bool>()
 
     @objc dynamic var deactivated: String?
 

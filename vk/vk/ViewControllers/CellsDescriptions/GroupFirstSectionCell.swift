@@ -36,7 +36,7 @@ class GroupFirstSectionCell: UITableViewCell {
     
     private lazy var customAccessoryView: UIButton = {
         let button = UIButton()
-        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
         
         button.layer.cornerRadius = button.frame.width / 2
         button.backgroundColor = .lightGray
@@ -44,7 +44,6 @@ class GroupFirstSectionCell: UITableViewCell {
         button.setTitle("52", for: .normal)
         button.setTitleColor(.white, for: .normal)
         
-        //button.sizeToFit()
         return button
     }()
     

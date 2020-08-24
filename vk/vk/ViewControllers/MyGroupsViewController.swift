@@ -82,8 +82,8 @@ extension MyGroupsViewController {
                     self.cellGroupInvitationModels.append(groupInvitationCell)
                 } else if let invitor = invitorUsers[event.is_advertiser] {
                     let invitor = invitor[0]
-                    //let groupInvitationCell = GroupInvitationCellModel(eventImage: event.photo_200, invitorImage: "", eventName: event.name, countOfParticipants: "", invitorName: invitor.lastName)
-                    //self.cellGroupInvitationModels.append(groupInvitationCell)
+                    let groupInvitationCell = GroupInvitationCellModel(eventImage: event.photo_200, invitorImage: "", eventName: event.name, countOfParticipants: "", invitorName: invitor.lastName)
+                    self.cellGroupInvitationModels.append(groupInvitationCell)
                 }
             }
             

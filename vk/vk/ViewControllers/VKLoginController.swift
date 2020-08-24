@@ -25,7 +25,7 @@ class VKLoginController: UIViewController {
         components.host = "oauth.vk.com"
         components.path = "/authorize"
         components.queryItems = [
-            URLQueryItem(name: "client_id", value: "6704883"),
+            URLQueryItem(name: "client_id", value: "7564962"),
             URLQueryItem(name: "scope", value: "262150"),
             URLQueryItem(name: "display", value: "mobile"),
             URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
@@ -63,9 +63,9 @@ extension VKLoginController: WKNavigationDelegate {
         }
         
         Session.shared.token = token
-        performSegue(withIdentifier: "RunTheAppSegue", sender: nil)
+        Session.shared.userId = userIdString
         
-        //NetworkService.exampleOfCodable()
+        performSegue(withIdentifier: "RunTheAppSegue", sender: nil)
         
         decisionHandler(.cancel)
     }
