@@ -15,8 +15,14 @@ class UserFriendsModel: Object, Codable {
         case count
     }
 
+    @objc dynamic var id: String = Session.shared.userId
+    
     @objc dynamic var count: Int = 0
-    var users = List<UserModel>() 
+    var users = List<UserModel>()
+    
+    override class func primaryKey() -> String? {
+        "id"
+    }
 }
 
 //struct UserFriendsModel: Decodable {
