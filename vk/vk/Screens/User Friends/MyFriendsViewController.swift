@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 extension MyFriendsViewController {
     enum Sections: Int, CaseIterable {
@@ -15,56 +16,74 @@ extension MyFriendsViewController {
 }
 
 class MyFriendsViewController: UITableViewController {
-    private var mostImportantFriendCellModels = [FriendsCellModel]()
-    private var friendCellModels = [FriendsCellModel]()
-    private var friendsAmount: Int = 0
+   
+    private let realmService = RealmService.shared
+ 
+    
+    private let searcController = UISearchController(searchResultsController: nil)
+    
+    
+    private var friendsAmount: Int {
+        let userFriendsModel: UserFriendsModel? = realmService?.getObjects().first
+        return userFriendsModel?.count ?? 0
+    }
+    
+    
+    
+    private var mostImportantFriendCellModels: Slice<List<UserModel>>? {
+        let userFriendsModel: UserFriendsModel? = realmService?.getObjects().first
+        let users = userFriendsModel?.users[0..<5]
+        
+        return users
+    }
+    private var friendCellModels: Results<UserModel>? {
+        let userFriendsModel: UserFriendsModel? = realmService?.getObjects().first
+        let users  = userFriendsModel?.users.sorted(byKeyPath: "id")
+        
+        return users
+    }
+
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Registes tableView cells, headers
         tableView.register(GroupHeader.self, forHeaderFooterViewReuseIdentifier: "GroupHeader")
         
-        getInitData()
+        
+        // Set up the search controller
+        searcController.searchResultsUpdater = self
+        searcController.obscuresBackgroundDuringPresentation = false
+        searcController.searchBar.placeholder = "Поиск"
+        
+        navigationItem.searchController = searcController
+        definesPresentationContext = true
+        
+        
+        // Load data from Network
+        loadDataFromNetwork()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
     }
 }
 
 //MARK: - Network
 
 extension MyFriendsViewController {
-    func getInitData() {
-        self.tableView.beginUpdates()
-        getFriends()
-    }
     
-    func getFriends() {
+    func loadDataFromNetwork(completion: (() -> Void)? = nil) {
+        
         NetworkService.shared.loadUserFriends(user_id: Session.shared.userId, order: "hints", list_id: "", count: 500, offset: 0, fields: "photo_200,city,bdate", name_case: "", ref: "") { [weak self] (userFriendsModel) in
-            
-            let friends = userFriendsModel.users
-            let friendsAmount = userFriendsModel.count
-            
-    
-            let numberOfRows = self?.friendCellModels.count ?? 0
-            self?.tableView.insertRows(at: Array(numberOfRows ..< numberOfRows + friends.count).map { IndexPath(row: $0, section: Sections.third.rawValue) }, with: .automatic)
-            
-            for friend in friends {
-                let model = FriendsCellModel(image: friend.photo200, name: friend.firstName, surename: friend.lastName, bdate: friend.bdate, city: friend.city)
-                self?.friendCellModels.append(model)
+
+            DispatchQueue.main.async {
+                try? self?.realmService?.add(object: userFriendsModel)
+                self?.tableView.reloadData()
+                completion?()
             }
-            
-            
-            self?.friendsAmount = friendsAmount
-            
-            
-            guard let friendCellModels = self?.friendCellModels else { return }
-            let mostImportantFriendCellModelsCount = friendCellModels.count < 5 ? friendCellModels.count : 5
-            //self?.mostImportantFriendCellModels = Array(friendCellModels[0 ..< mostImportantFriendCellModelsCount])
-            self?.mostImportantFriendCellModels = Array(repeating: friendCellModels[0], count: 5)
-            
-            self?.tableView.insertRows(at: Array(0 ..< mostImportantFriendCellModelsCount).map { IndexPath(row: $0, section: Sections.second.rawValue) }, with: .automatic)
-            
-            
-            self?.tableView.endUpdates()
-            //self.tableView.reloadData()
         }
     }
 }
@@ -83,9 +102,9 @@ extension MyFriendsViewController {
         case .first:
             return 1
         case .second:
-            return mostImportantFriendCellModels.count
+            return mostImportantFriendCellModels?.count ?? 0
         case .third:
-            return friendCellModels.count
+            return friendCellModels?.count ?? 0
         default:
             print("error: invalid section.")
             fatalError()
@@ -107,7 +126,7 @@ extension MyFriendsViewController {
                 fatalError()
             }
             
-            cell.model = mostImportantFriendCellModels[indexPath.row]
+            cell.model = mostImportantFriendCellModels?[indexPath.row]
             
             return cell
         case .third:
@@ -115,7 +134,7 @@ extension MyFriendsViewController {
                 fatalError()
             }
             
-            cell.model = friendCellModels[indexPath.row]
+            cell.model = friendCellModels?[indexPath.row]
             
             return cell
         default:
@@ -182,3 +201,9 @@ extension MyFriendsViewController {
     }
 }
 
+extension MyFriendsViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        
+    }
+}

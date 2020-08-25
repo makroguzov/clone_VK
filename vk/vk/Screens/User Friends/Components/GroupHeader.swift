@@ -9,6 +9,7 @@
 import UIKit
 
 extension GroupHeader {
+    
     enum Models {
         case mostImportantFriendsSection
         case friendsSection(FriendsSection)
@@ -21,6 +22,7 @@ extension GroupHeader {
 }
 
 class GroupHeader: UITableViewHeaderFooterView {
+    
     var model: Models? {
         didSet {
             cleanHeader()
@@ -84,6 +86,7 @@ class GroupHeader: UITableViewHeaderFooterView {
         textLable.translatesAutoresizingMaskIntoConstraints = false
         
         textLable.text = "Важные"
+        textLable.font = UIFont(name: "RobotoSlab-Medium", size: 16)
         
         let lableConstraints = [
             textLable.leftAnchor.constraint(equalTo: leftAnchor, constant: borderIndent),
@@ -102,7 +105,25 @@ class GroupHeader: UITableViewHeaderFooterView {
         let textLable = UILabel()
         textLable.translatesAutoresizingMaskIntoConstraints = false
         
-        textLable.text = "Мои друзья \(friendsSectionData.friendsAmount)"
+        
+        let lableText = NSMutableAttributedString()
+        let textName = NSAttributedString(string: "Мои Друзья ", attributes:
+            [
+                NSAttributedString.Key.font: UIFont(name: "RobotoSlab-Medium", size: 16)!,
+                NSAttributedString.Key.foregroundColor: UIColor.black
+        ])
+        lableText.append(textName)
+        
+        let friendsAmountText = NSAttributedString(string: String(friendsSectionData.friendsAmount), attributes:
+            [
+                NSAttributedString.Key.font: UIFont(name: "RobotoSlab-Light", size: 12)!,
+                NSAttributedString.Key.foregroundColor: UIColor.lightGray
+        ])
+        lableText.append(friendsAmountText)
+        
+        textLable.attributedText = lableText
+        
+        
         
         let lableConstraints = [
             textLable.leftAnchor.constraint(equalTo: leftAnchor, constant: borderIndent),
