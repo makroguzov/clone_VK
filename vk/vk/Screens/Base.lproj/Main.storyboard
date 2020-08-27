@@ -54,6 +54,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="CIm-L5-FSF" kind="relationship" relationship="viewControllers" id="RaY-5V-Y0d"/>
+                        <segue destination="Qcw-tS-yQB" kind="relationship" relationship="viewControllers" id="db1-zi-2Dw"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gv7-xS-Q3E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -61,14 +62,55 @@
             <point key="canvasLocation" x="-1119" y="143"/>
         </scene>
         <!--Item-->
-        <scene sceneID="Pmr-bg-fjT">
+        <scene sceneID="qzw-3G-3Mj">
             <objects>
-                <navigationController id="CIm-L5-FSF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="pdn-X2-OIB"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CMG-gJ-5Ak">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                <navigationController modalPresentationStyle="fullScreen" id="Qcw-tS-yQB" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="LBg-UD-yIF"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="82T-48-FYX">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="EXn-j0-Asv">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="GhW-nV-jjL" kind="relationship" relationship="rootViewController" id="hDf-9s-cz4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QIt-hj-Bi5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-152" y="-567"/>
+        </scene>
+        <!--Фотографии-->
+        <scene sceneID="U2u-dy-TSS">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Iqc-lR-2r6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController id="GhW-nV-jjL" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hEv-O3-GO0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Dt9-hL-ImS"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Фотографии" id="iOq-sn-Uua"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="829" y="-567"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="Pmr-bg-fjT">
+            <objects>
+                <navigationController modalPresentationStyle="fullScreen" id="CIm-L5-FSF" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="pdn-X2-OIB"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CMG-gJ-5Ak">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qnK-0O-MBQ">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="ahN-N2-FPV" kind="relationship" relationship="rootViewController" id="wrl-2R-46I"/>
                     </connections>
@@ -82,7 +124,7 @@
             <objects>
                 <tableViewController modalPresentationStyle="fullScreen" id="ahN-N2-FPV" customClass="MyFriendsViewController" customModule="vk" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="1" id="fAX-5c-Nec">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>

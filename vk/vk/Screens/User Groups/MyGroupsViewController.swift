@@ -87,6 +87,7 @@ extension MyGroupsViewController {
                 }
             }
             
+            
             self.tableView.reloadData()
             self.tableView.endUpdates()
         }

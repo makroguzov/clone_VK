@@ -45,6 +45,15 @@ class UserModel: Object, Codable {
     @objc dynamic var photoOrig: String?
     
     
+    @objc dynamic var name: String {
+        return "\(firstName) \(lastName)"
+    }
+    
+    
+    override class func ignoredProperties() -> [String] {
+        ["name"]
+    }
+    
     override class func primaryKey() -> String? {
         "id"
     }

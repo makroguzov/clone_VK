@@ -42,6 +42,7 @@
 		636C640E24F4678900356F57 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 636C640224F4678900356F57 /* README.txt */; };
 		636C640F24F4678900356F57 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 636C640324F4678900356F57 /* LICENSE.txt */; };
 		636C641324F4897D00356F57 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636C641224F4897D00356F57 /* RealmService.swift */; };
+		636C641C24F7EA0100356F57 /* UserPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636C641B24F7EA0100356F57 /* UserPhotosViewController.swift */; };
 		63D1C8A924F2E57E00F39111 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D1C8A824F2E57E00F39111 /* AppDelegate.swift */; };
 		63D1C8AB24F2E57E00F39111 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D1C8AA24F2E57E00F39111 /* SceneDelegate.swift */; };
 		63D1C8B024F2E57E00F39111 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63D1C8AE24F2E57E00F39111 /* Main.storyboard */; };
@@ -123,6 +124,7 @@
 		636C640224F4678900356F57 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		636C640324F4678900356F57 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		636C641224F4897D00356F57 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
+		636C641B24F7EA0100356F57 /* UserPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotosViewController.swift; sourceTree = "<group>"; };
 		63D1C8A524F2E57E00F39111 /* vk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63D1C8A824F2E57E00F39111 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63D1C8AA24F2E57E00F39111 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				636C641724F4E58F00356F57 /* User Friends */,
+				636C641A24F7E9BF00356F57 /* User Photos */,
 				63D1C8DD24F2E73100F39111 /* User Groups */,
 				63D1C8DE24F2E76E00F39111 /* VKLoginController.swift */,
 				63D1C8AE24F2E57E00F39111 /* Main.storyboard */,
@@ -307,6 +310,14 @@
 				63D1C90424F2EB1800F39111 /* GroupInvitationCellModel.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		636C641A24F7E9BF00356F57 /* User Photos */ = {
+			isa = PBXGroup;
+			children = (
+				636C641B24F7EA0100356F57 /* UserPhotosViewController.swift */,
+			);
+			path = "User Photos";
 			sourceTree = "<group>";
 		};
 		63D1C89C24F2E57E00F39111 = {
@@ -631,6 +642,7 @@
 				63D1C8DA24F2E6D600F39111 /* Session.swift in Sources */,
 				63D1C91924F3093B00F39111 /* Response.swift in Sources */,
 				63D1C8EA24F2E8DA00F39111 /* UserModel.swift in Sources */,
+				636C641C24F7EA0100356F57 /* UserPhotosViewController.swift in Sources */,
 				636C63CA24F4392300356F57 /* MyFriendsViewController.swift in Sources */,
 				63D1C8EC24F2E8FD00F39111 /* UserGroupsModel.swift in Sources */,
 				63D1C91724F306E800F39111 /* City.swift in Sources */,

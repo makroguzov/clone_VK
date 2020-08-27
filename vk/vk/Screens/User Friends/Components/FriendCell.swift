@@ -79,17 +79,18 @@ class FriendCell: UITableViewCell {
         friendName.font = UIFont(name: "RobotoSlab-VariableFont_wght", size: 16)
         
         
-        var friendSubtitileText = ""
+        var ageText = ""
+        var cityName = ""
         
         if let bdate = model.bdate, let date = dateFormatter.date(from: bdate), let days = Calendar.current.dateComponents([.day], from: date, to: Date()).day {
-            let age = Int(days / 365)
-            friendSubtitileText.append("\(String(age)), ")
+            let age = days / 365
+            ageText = "\(String(age)) \((age % 10 < 5) && (age % 10 > 1) ? "года" : (age % 10 == 1) ? "год" : "лет")"
         }
         if let city = model.city {
-            friendSubtitileText.append(city.title)
+            cityName = city.title
         }
         
-        friendSubtitile.text = friendSubtitileText
+        friendSubtitile.text = "\(ageText == "" ? "" : "\(ageText)")\(ageText != "" && cityName != "" ? ", " : "")\(cityName)"
     }
     
     override func awakeFromNib() {
