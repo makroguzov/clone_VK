@@ -56,8 +56,11 @@ class MyFriendsViewController: UITableViewController {
     private var friendCellModelsNotificationToken: NotificationToken?
     private var mostImportantFriendCellModelsNotificationToken: NotificationToken?
     
+    
     private var mostImportantFriendCellModels: Results<UserFriendModel>? {
         let users: Results<UserFriendModel>? = realmService?.getObjects()
+        let mostImportant: Results<UserFriendModel>
+        
         return users
     }
     private var friendCellModels: Results<UserFriendModel>? {
@@ -94,6 +97,11 @@ class MyFriendsViewController: UITableViewController {
 
     }
     
+    deinit {
+        friendCellModelsNotificationToken?.invalidate()
+        mostImportantFriendCellModelsNotificationToken?.invalidate()
+    }
+    
     private func createNotifications() {
         
         friendCellModelsNotificationToken = friendCellModels?.observe({ [weak self] (changes) in
@@ -126,11 +134,11 @@ class MyFriendsViewController: UITableViewController {
                 
             case let .update(_, deletions: deletions, insertions: insertions, modifications: modifications):
                 
-                let section = Sections.third.rawValue
+                let section = Sections.second.rawValue
                 
-                self?.tableView.deleteRows(at: deletions.map { IndexPath(item: $0, section: section) }, with: .automatic)
-                self?.tableView.insertRows(at: insertions.map { IndexPath(item: $0, section: section) }, with: .automatic)
-                self?.tableView.reloadRows(at: modifications.map { IndexPath(item: $0, section: section) }, with: .automatic)
+                self?.tableView.deleteRows(at: deletions.filter {$0 < 5}.map { IndexPath(item: $0, section: section) }, with: .automatic)
+                self?.tableView.insertRows(at: insertions.filter {$0 < 5}.map { IndexPath(item: $0, section: section) }, with: .automatic)
+                self?.tableView.reloadRows(at: modifications.filter {$0 < 5}.map { IndexPath(item: $0, section: section) }, with: .automatic)
                 
             case let .error(error):
                 print(error.localizedDescription)
@@ -157,6 +165,7 @@ extension MyFriendsViewController {
 
             DispatchQueue.main.async {
                 try? self?.realmService?.add(objects: userFriendsModel.friends)
+                //self?.tableView.reloadData()
                 completion?()
             }
         }
