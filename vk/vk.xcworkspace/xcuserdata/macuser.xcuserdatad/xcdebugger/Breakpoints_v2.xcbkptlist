@@ -126,8 +126,8 @@
             filePath = "vk/Screens/User Friends/MyFriendsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "313"
-            endingLineNumber = "313"
+            startingLineNumber = "312"
+            endingLineNumber = "312"
             landmarkName = "tableView(_:willDisplayHeaderView:forSection:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -142,10 +142,10 @@
             filePath = "vk/Screens/User Friends/MyFriendsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "265"
-            endingLineNumber = "265"
-            landmarkName = "tableView(_:viewForHeaderInSection:)"
-            landmarkType = "7">
+            startingLineNumber = "264"
+            endingLineNumber = "264"
+            landmarkName = "MyFriendsViewController"
+            landmarkType = "21">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -174,8 +174,8 @@
             filePath = "vk/Screens/User Friends/MyFriendsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
             landmarkName = "loadDataFromNetwork(completion:)"
             landmarkType = "7">
             <Locations>
@@ -190,8 +190,8 @@
                   urlString = "file:///Users/macuser/Desktop/clone_VK/vk/vk/Screens/User%20Friends/MyFriendsViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "164"
-                  endingLineNumber = "164"
+                  startingLineNumber = "162"
+                  endingLineNumber = "162"
                   offsetFromSymbolStart = "280">
                </Location>
                <Location
@@ -205,8 +205,8 @@
                   urlString = "file:///Users/macuser/Desktop/clone_VK/vk/vk/Screens/User%20Friends/MyFriendsViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "162"
-                  endingLineNumber = "162"
+                  startingLineNumber = "160"
+                  endingLineNumber = "160"
                   offsetFromSymbolStart = "44">
                </Location>
             </Locations>
@@ -216,16 +216,95 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "8168B1C2-0D25-4C58-9C22-418F946D32EC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "vk/Screens/User Friends/MyFriendsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
+            landmarkName = "refresh(_:)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "471079F9-EB0F-4A35-B2E0-11BD69E6AC15"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "vk/Screens/User Friends/MyFriendsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "createNotifications()"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "471079F9-EB0F-4A35-B2E0-11BD69E6AC15 - 622a021d0af3a258"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (RealmSwift.RealmCollectionChange&lt;RealmSwift.Results&lt;vk.UserFriendModel&gt;&gt;) -&gt; () in vk.MyFriendsViewController.(createNotifications in _8FB3D77DABB134D8B8836841B2BA1BB8)() -&gt; ()"
+                  moduleName = "vk"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macuser/Desktop/clone_VK/vk/vk/Screens/User%20Friends/MyFriendsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "137"
+                  endingLineNumber = "137"
+                  offsetFromSymbolStart = "696">
+               </Location>
+               <Location
+                  uuid = "471079F9-EB0F-4A35-B2E0-11BD69E6AC15 - 821aa61072268f7d"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Int) -&gt; Swift.Bool in closure #2 (RealmSwift.RealmCollectionChange&lt;RealmSwift.Results&lt;vk.UserFriendModel&gt;&gt;) -&gt; () in vk.MyFriendsViewController.(createNotifications in _8FB3D77DABB134D8B8836841B2BA1BB8)() -&gt; ()"
+                  moduleName = "vk"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macuser/Desktop/clone_VK/vk/vk/Screens/User%20Friends/MyFriendsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "137"
+                  endingLineNumber = "137"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "471079F9-EB0F-4A35-B2E0-11BD69E6AC15 - 9806ab0417d34204"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Int) -&gt; Foundation.IndexPath in closure #2 (RealmSwift.RealmCollectionChange&lt;RealmSwift.Results&lt;vk.UserFriendModel&gt;&gt;) -&gt; () in vk.MyFriendsViewController.(createNotifications in _8FB3D77DABB134D8B8836841B2BA1BB8)() -&gt; ()"
+                  moduleName = "vk"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macuser/Desktop/clone_VK/vk/vk/Screens/User%20Friends/MyFriendsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "137"
+                  endingLineNumber = "137"
+                  offsetFromSymbolStart = "112">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "983111D1-608F-4A5B-94C9-582BCC302175"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "vk/Screens/User Friends/MyFriendsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
-            landmarkName = "refresh(_:)"
-            landmarkType = "7">
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "createNotifications()"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

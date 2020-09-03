@@ -12,4 +12,8 @@ import RealmSwift
 class City: Object, Codable {
     @objc dynamic var id: Int
     @objc dynamic var title: String
+    
+    override class func primaryKey() -> String? {
+        "id"
+    }
 }

@@ -143,7 +143,6 @@ class MyFriendsViewController: UITableViewController {
             }
 
         })
-
     }
     
     @objc private func refresh(_ sender: UIRefreshControl) {
