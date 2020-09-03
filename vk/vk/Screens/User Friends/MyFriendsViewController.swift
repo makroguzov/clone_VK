@@ -48,53 +48,31 @@ class MyFriendsViewController: UITableViewController {
     
     
     private var friendsAmount: Int {
-        let userFriendsModel: UserFriendsModel? = realmService?.getObjects().first
+        let userFriendsModel: Results<UserFriendModel>? = realmService?.getObjects()
         return userFriendsModel?.count ?? 0
     }
     
     
     private var friendCellModelsNotificationToken: NotificationToken?
+    private var mostImportantFriendCellModelsNotificationToken: NotificationToken?
     
-    
-    private var userFriendsModel: UserFriendsModel? {
-        return realmService?.getObjects().first
-    }
-    private var mostImportantFriendCellModels: Slice<List<UserModel>>? {
-        let users = userFriendsModel?.users[0..<5]
+    private var mostImportantFriendCellModels: Results<UserFriendModel>? {
+        let users: Results<UserFriendModel>? = realmService?.getObjects()
         return users
     }
-    private var friendCellModels: Results<UserModel>? {
-        let users  = userFriendsModel?.users.sorted(byKeyPath: "id")
+    private var friendCellModels: Results<UserFriendModel>? {
+        let users: Results<UserFriendModel>? = realmService?.getObjects().sorted(byKeyPath: "id")
         return users
     }
-    private var filteredFriendCellModels: Results<UserModel>?
+    private var filteredFriendCellModels: Results<UserFriendModel>?
 
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        friendCellModelsNotificationToken = friendCellModels?.observe({ [weak self] (change) in
+        createNotifications()
             
-            switch change {
-            case let .initial(friends):
-                
-                #if DEBUG
-                print("Initialized \(friends.count)")
-                #endif
-                
-            case let .update(_, deletions: deletions, insertions: insertions, modifications: modifications):
-                
-                let section = Sections.third.rawValue
-                
-                self?.tableView.deleteRows(at: deletions.map { IndexPath(item: $0, section: section) }, with: .automatic)
-                self?.tableView.insertRows(at: insertions.map { IndexPath(item: $0, section: section) }, with: .automatic)
-                self?.tableView.reloadRows(at: modifications.map { IndexPath(item: $0, section: section) }, with: .automatic)
-                
-            case let .error(error):
-                print(error.localizedDescription)
-            }
-        })
         
         // Setup tableView
         tableView.register(GroupHeader.self, forHeaderFooterViewReuseIdentifier: "GroupHeader")
@@ -116,6 +94,52 @@ class MyFriendsViewController: UITableViewController {
 
     }
     
+    private func createNotifications() {
+        
+        friendCellModelsNotificationToken = friendCellModels?.observe({ [weak self] (changes) in
+            
+            switch changes {
+            case let .initial(friends):
+                
+                print("Initialized \(friends.count)")
+                
+            case let .update(_, deletions: deletions, insertions: insertions, modifications: modifications):
+                
+                let section = Sections.third.rawValue
+                
+                self?.tableView.deleteRows(at: deletions.map { IndexPath(item: $0, section: section) }, with: .automatic)
+                self?.tableView.insertRows(at: insertions.map { IndexPath(item: $0, section: section) }, with: .automatic)
+                self?.tableView.reloadRows(at: modifications.map { IndexPath(item: $0, section: section) }, with: .automatic)
+                
+            case let .error(error):
+                print(error.localizedDescription)
+            }
+        })
+        
+        mostImportantFriendCellModelsNotificationToken = mostImportantFriendCellModels?.observe({ [weak self] (changes) in
+            
+            switch changes {
+            
+            case let .initial(friends):
+                
+                print("Initialized \(friends.count)")
+                
+            case let .update(_, deletions: deletions, insertions: insertions, modifications: modifications):
+                
+                let section = Sections.third.rawValue
+                
+                self?.tableView.deleteRows(at: deletions.map { IndexPath(item: $0, section: section) }, with: .automatic)
+                self?.tableView.insertRows(at: insertions.map { IndexPath(item: $0, section: section) }, with: .automatic)
+                self?.tableView.reloadRows(at: modifications.map { IndexPath(item: $0, section: section) }, with: .automatic)
+                
+            case let .error(error):
+                print(error.localizedDescription)
+            }
+
+        })
+
+    }
+    
     @objc private func refresh(_ sender: UIRefreshControl) {
         try? realmService?.deleteAll()
         loadDataFromNetwork { [weak self] in
@@ -132,8 +156,7 @@ extension MyFriendsViewController {
         NetworkService.shared.loadUserFriends(user_id: Session.shared.userId, order: "hints", list_id: "", count: 500, offset: 0, fields: "photo_200,city,bdate", name_case: "", ref: "") { [weak self] (userFriendsModel) in
 
             DispatchQueue.main.async {
-                try? self?.realmService?.add(object: userFriendsModel)
-                //self?.tableView.reloadData()
+                try? self?.realmService?.add(objects: userFriendsModel.friends)
                 completion?()
             }
         }
@@ -163,7 +186,8 @@ extension MyFriendsViewController {
             return 1
         
         case .second:
-            return mostImportantFriendCellModels?.count ?? 0
+            let count = mostImportantFriendCellModels?.count ?? 0
+            return count < 5 ? count : 5
         
         case .third:
             return friendCellModels?.count ?? 0

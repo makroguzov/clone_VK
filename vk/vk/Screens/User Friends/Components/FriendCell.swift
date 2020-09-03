@@ -60,7 +60,7 @@ class FriendCell: UITableViewCell {
     }()
     
     
-    var model: UserModel? {
+    var model: UserFriendModel? {
         didSet {
             setFriendCellModel()
         }
