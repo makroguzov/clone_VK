@@ -53,6 +53,9 @@ class MyFriendsViewController: UITableViewController {
     }
     
     
+    private var friendCellModelsNotificationToken: NotificationToken?
+    
+    
     private var userFriendsModel: UserFriendsModel? {
         return realmService?.getObjects().first
     }
@@ -70,6 +73,28 @@ class MyFriendsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        friendCellModelsNotificationToken = friendCellModels?.observe({ [weak self] (change) in
+            
+            switch change {
+            case let .initial(friends):
+                
+                #if DEBUG
+                print("Initialized \(friends.count)")
+                #endif
+                
+            case let .update(_, deletions: deletions, insertions: insertions, modifications: modifications):
+                
+                let section = Sections.third.rawValue
+                
+                self?.tableView.deleteRows(at: deletions.map { IndexPath(item: $0, section: section) }, with: .automatic)
+                self?.tableView.insertRows(at: insertions.map { IndexPath(item: $0, section: section) }, with: .automatic)
+                self?.tableView.reloadRows(at: modifications.map { IndexPath(item: $0, section: section) }, with: .automatic)
+                
+            case let .error(error):
+                print(error.localizedDescription)
+            }
+        })
         
         // Setup tableView
         tableView.register(GroupHeader.self, forHeaderFooterViewReuseIdentifier: "GroupHeader")
@@ -108,7 +133,7 @@ extension MyFriendsViewController {
 
             DispatchQueue.main.async {
                 try? self?.realmService?.add(object: userFriendsModel)
-                self?.tableView.reloadData()
+                //self?.tableView.reloadData()
                 completion?()
             }
         }
@@ -133,13 +158,17 @@ extension MyFriendsViewController {
         let section = Sections(rawValue: section)
         
         switch section {
+        
         case .first:
             return 1
+        
         case .second:
             return mostImportantFriendCellModels?.count ?? 0
+        
         case .third:
             return friendCellModels?.count ?? 0
-        default:
+        
+        case .none:
             print("error: invalid section.")
             fatalError()
         }
@@ -158,21 +187,25 @@ extension MyFriendsViewController {
         let section = Sections(rawValue: indexPath.section)
         
         switch section {
+        
         case .first:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupFirstSectionCell") as? GroupFirstSectionCell else { fatalError()
             }
             return cell
+        
         case .second:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendCell") as? FriendCell else { fatalError() }
             
             cell.model = mostImportantFriendCellModels?[indexPath.row]
             return cell
+        
         case .third:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendCell") as? FriendCell else { fatalError() }
             
             cell.model = friendCellModels?[indexPath.row]
             return cell
-        default:
+        
+        case .none:
             print("error: invalid section.")
             fatalError()
         }
@@ -187,11 +220,14 @@ extension MyFriendsViewController {
         let section = Sections(rawValue: indexPath.section)
         
         switch section {
+        
         case .first:
             return 60
+        
         case .second, .third:
             return 60
-        default:
+        
+        case .none:
             return 0
         }
     }
@@ -205,16 +241,20 @@ extension MyFriendsViewController {
     
         let section = Sections(rawValue: section)
         switch section {
+        
         case .first:
             header.model = .firstSection
             return header
+        
         case .second:
             header.model = .mostImportantFriendsSection
             return header
+        
         case .third:
             header.model = .friendsSection(.init(friendsAmount: friendsAmount))
             return header
-        default:
+        
+        case .none:
             return header
         }
     }
@@ -224,13 +264,17 @@ extension MyFriendsViewController {
         
         let section = Sections(rawValue: section)
         switch section {
+        
         case .first:
             return 60
+        
         case .second:
             return 50
+        
         case .third:
             return 50
-        default:
+        
+        case .none:
             return 0
         }
     }
