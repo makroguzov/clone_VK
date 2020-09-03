@@ -126,8 +126,8 @@
             filePath = "vk/Screens/User Friends/MyFriendsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "317"
-            endingLineNumber = "317"
+            startingLineNumber = "313"
+            endingLineNumber = "313"
             landmarkName = "tableView(_:willDisplayHeaderView:forSection:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -142,8 +142,8 @@
             filePath = "vk/Screens/User Friends/MyFriendsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "269"
-            endingLineNumber = "269"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
             landmarkName = "tableView(_:viewForHeaderInSection:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -174,8 +174,8 @@
             filePath = "vk/Screens/User Friends/MyFriendsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
             landmarkName = "loadDataFromNetwork(completion:)"
             landmarkType = "7">
             <Locations>
@@ -215,54 +215,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1C1054B5-4F73-4889-826D-5E966ED31840"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "vk/Screens/User Friends/MyFriendsViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
-            landmarkName = "refresh(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "1C1054B5-4F73-4889-826D-5E966ED31840 - 6b68247d31f08b7b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "vk.MyFriendsViewController.(refresh in _8FB3D77DABB134D8B8836841B2BA1BB8)(__C.UIRefreshControl) -&gt; ()"
-                  moduleName = "vk"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/macuser/Desktop/clone_VK/vk/vk/Screens/User%20Friends/MyFriendsViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "151"
-                  endingLineNumber = "151"
-                  offsetFromSymbolStart = "248">
-               </Location>
-               <Location
-                  uuid = "1C1054B5-4F73-4889-826D-5E966ED31840 - 1554811848a1d5bc"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in vk.MyFriendsViewController.(refresh in _8FB3D77DABB134D8B8836841B2BA1BB8)(__C.UIRefreshControl) -&gt; ()"
-                  moduleName = "vk"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/macuser/Desktop/clone_VK/vk/vk/Screens/User%20Friends/MyFriendsViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "151"
-                  endingLineNumber = "151"
-                  offsetFromSymbolStart = "44">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "8168B1C2-0D25-4C58-9C22-418F946D32EC"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -270,8 +222,8 @@
             filePath = "vk/Screens/User Friends/MyFriendsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "refresh(_:)"
             landmarkType = "7">
          </BreakpointContent>

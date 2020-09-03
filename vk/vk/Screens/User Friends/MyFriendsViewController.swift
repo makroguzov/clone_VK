@@ -59,8 +59,6 @@ class MyFriendsViewController: UITableViewController {
     
     private var mostImportantFriendCellModels: Results<UserFriendModel>? {
         let users: Results<UserFriendModel>? = realmService?.getObjects()
-        let mostImportant: Results<UserFriendModel>
-        
         return users
     }
     private var friendCellModels: Results<UserFriendModel>? {
@@ -149,7 +147,6 @@ class MyFriendsViewController: UITableViewController {
     }
     
     @objc private func refresh(_ sender: UIRefreshControl) {
-        try? realmService?.deleteAll()
         loadDataFromNetwork { [weak self] in
             self?.refreshControl?.endRefreshing()
         }
@@ -165,7 +162,6 @@ extension MyFriendsViewController {
 
             DispatchQueue.main.async {
                 try? self?.realmService?.add(objects: userFriendsModel.friends)
-                //self?.tableView.reloadData()
                 completion?()
             }
         }
