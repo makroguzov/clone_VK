@@ -9,14 +9,14 @@
 import Foundation
 import RealmSwift
 
-class UserFriendsModel: Object, Codable {
+struct UserFriendsModel: Codable {
     enum CodingKeys: String, CodingKey {
-        case users = "items"
+        case friends = "items"
         case count
     }
 
-    @objc dynamic var count: Int = 0
-    var users = List<UserModel>() 
+    var count: Int = 0
+    var friends: [UserFriendModel]
 }
 
 //struct UserFriendsModel: Decodable {

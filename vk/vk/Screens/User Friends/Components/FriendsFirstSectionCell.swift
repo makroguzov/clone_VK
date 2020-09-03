@@ -9,6 +9,7 @@
 import UIKit
 
 class GroupFirstSectionCell: UITableViewCell {
+    
     @IBOutlet weak var firstImageView: UIImageView! {
         didSet {
             firstImageView.layer.cornerRadius = firstImageView.frame.width / 2
@@ -41,8 +42,15 @@ class GroupFirstSectionCell: UITableViewCell {
         button.layer.cornerRadius = button.frame.width / 2
         button.backgroundColor = .lightGray
         
-        button.setTitle("52", for: .normal)
+        let title = NSAttributedString(string: "52", attributes:
+            [
+                NSAttributedString.Key.font: UIFont(name: "RobotoSlab-Light", size: 12)!
+        ])
+        button.setAttributedTitle(title, for: .normal)
         button.setTitleColor(.white, for: .normal)
+        
+        
+        button.isUserInteractionEnabled = false
         
         return button
     }()

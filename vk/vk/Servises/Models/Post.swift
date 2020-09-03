@@ -6,7 +6,7 @@
 //  Copyright © 2020 MACUSER. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class Post {
     

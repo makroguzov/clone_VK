@@ -10,6 +10,7 @@ import Foundation
 import RealmSwift
 
 class UserModel: Object, Codable {
+    
     enum CodingKeys: String, CodingKey {
         case id
         case firstName = "first_name"
@@ -42,6 +43,20 @@ class UserModel: Object, Codable {
     @objc dynamic var photo200: String?
     @objc dynamic var photo50: String?
     @objc dynamic var photoOrig: String?
+    
+    
+    @objc dynamic var name: String {
+        return "\(firstName) \(lastName)"
+    }
+    
+    
+    override class func ignoredProperties() -> [String] {
+        ["name"]
+    }
+    
+    override class func primaryKey() -> String? {
+        "id"
+    }
 }
 
 //struct UserModel: Decodable {

@@ -64,32 +64,60 @@ class NetworkService {
         }
     }
     
-    func loadUserGroups(userId: String, extended: Int, filter: String, fields: String, offset: Int, count: Int,
-     complitoin: @escaping (UserGroupsModel) -> Void) {
-        let baseUrl = "https://api.vk.com"
-        let path = "/method/groups.get"
-        
-        let params: Parameters = [
-            "access_token": Session.shared.token,
-            "user_id" : userId,
-            "extended": extended,
-            "filter" : filter,
-            "fields" : fields,
-            "offset" : offset,
-            "count" : count,
-            "v": "5.92"
-        ]
+    func loadUserGroups(userId: String, extended: Int, filter: String, fields: String, offset: Int, count: Int, complitoin: @escaping (UserGroupsModel) -> Void) {
+    let baseUrl = "https://api.vk.com"
+    let path = "/method/groups.get"
+    
+    let params: Parameters = [
+        "access_token": Session.shared.token,
+        "user_id" : userId,
+        "extended": extended,
+        "filter" : filter,
+        "fields" : fields,
+        "offset" : offset,
+        "count" : count,
+        "v": "5.92"
+    ]
 
-        NetworkService.session.request(baseUrl + path, method: .get, parameters: params).responseDecodable { (response: DataResponse<UserGroupsModel, AFError>) in
-            switch response.result {
-            case .success(let userGroupModel):
-                complitoin(userGroupModel)
-            case .failure(let err):
-                print(err.localizedDescription)
-            }
+    NetworkService.session.request(baseUrl + path, method: .get, parameters: params).responseDecodable { (response: DataResponse<UserGroupsModel, AFError>) in
+        switch response.result {
+        case .success(let userGroupModel):
+            complitoin(userGroupModel)
+        case .failure(let err):
+            print(err.localizedDescription)
         }
-        
     }
+    
+}
+    
+//    func loadUserFriends(user_id: String, order: String, list_id: String, count: Int, offset: Int, fields: String, name_case: String, ref: String, complition: @escaping (UserFriendsModel) -> Void) {
+//        let baseUrl = "https://api.vk.com"
+//        let path = "/method/friends.get"
+//
+//        let params: Parameters = [
+//            "access_token": Session.shared.token,
+//            "user_id": user_id,
+//            "order": order,
+//            "list_id": list_id,
+//            "count": count,
+//            "offset": offset,
+//            "fields": fields,
+//            "name_case": name_case,
+//            "ref": ref,
+//            "v": "5.92"
+//        ]
+//
+//        NetworkService.session.request(baseUrl + path, method: .get, parameters: params).responseDecodable() {
+//            (response: DataResponse<Response<UserFriendsModel>, AFError>) in
+//
+//            switch response.result {
+//            case .success(let result):
+//                complition(result.response)
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
+//    }
     
     func loadUserFriends(user_id: String, order: String, list_id: String, count: Int, offset: Int, fields: String, name_case: String, ref: String, complition: @escaping (UserFriendsModel) -> Void) {
         let baseUrl = "https://api.vk.com"
@@ -119,4 +147,5 @@ class NetworkService {
             }
         }
     }
+
 }
