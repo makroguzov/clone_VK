@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import Firebase
 
 extension MyFriendsViewController {
     enum Sections: Int, CaseIterable {
@@ -97,12 +98,11 @@ class MyFriendsViewController: UITableViewController {
 
     }
     
-    
-    
     deinit {
         friendCellModelsNotificationToken?.invalidate()
         mostImportantFriendCellModelsNotificationToken?.invalidate()
     }
+    
     
     private func createNotifications() {
         
@@ -125,9 +125,11 @@ class MyFriendsViewController: UITableViewController {
                  print("modified \(modifications.count): \(modifications)")
                 #endif
 
-                self?.tableView.deleteRows(at: deletions.map { IndexPath(item: $0, section: section) }, with: .automatic)
-                self?.tableView.insertRows(at: insertions.map { IndexPath(item: $0, section: section) }, with: .automatic)
-                self?.tableView.reloadRows(at: modifications.map { IndexPath(item: $0, section: section) }, with: .automatic)
+                self?.tableView.beginUpdates()
+                 self?.tableView.deleteRows(at: deletions.map { IndexPath(item: $0, section: section) }, with: .automatic)
+                 self?.tableView.insertRows(at: insertions.map { IndexPath(item: $0, section: section) }, with: .automatic)
+                 self?.tableView.reloadRows(at: modifications.map { IndexPath(item: $0, section: section) }, with: .automatic)
+                self?.tableView.endUpdates()
                 
             case let .error(error):
                 print(error.localizedDescription)
@@ -154,9 +156,12 @@ class MyFriendsViewController: UITableViewController {
                  print("modified \(modifications.count): \(modifications)")
                 #endif
                 
-                self?.tableView.deleteRows(at: deletions.filter {$0 < 5}.map { IndexPath(item: $0, section: section) }, with: .automatic)
-                self?.tableView.insertRows(at: insertions.filter {$0 < 5}.map { IndexPath(item: $0, section: section) }, with: .automatic)
-                self?.tableView.reloadRows(at: modifications.filter {$0 < 5}.map { IndexPath(item: $0, section: section) }, with: .automatic)
+                self?.tableView.beginUpdates()
+                 self?.tableView.deleteRows(at: deletions.filter {$0 < 5}.map { IndexPath(item: $0, section: section) }, with: .automatic)
+                 self?.tableView.insertRows(at: insertions.filter {$0 < 5}.map { IndexPath(item: $0, section: section) }, with: .automatic)
+                 self?.tableView.reloadRows(at: modifications.filter {$0 < 5}.map { IndexPath(item: $0, section: section) }, with: .automatic)
+                self?.tableView.endUpdates()
+                
             case let .error(error):
                 print(error.localizedDescription)
             }
@@ -171,6 +176,15 @@ class MyFriendsViewController: UITableViewController {
         loadDataFromNetwork { [weak self] in
             self?.refreshControl?.endRefreshing()
             self?.tableView.endUpdates()
+        }
+    }
+
+
+    @IBAction func logOutAction(_ sender: UIBarButtonItem) {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            showAlert(title: "error", message: error.localizedDescription)
         }
     }
 }
