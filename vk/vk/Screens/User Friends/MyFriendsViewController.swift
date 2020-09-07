@@ -22,9 +22,11 @@ class MyFriendsViewController: UITableViewController {
     
     private lazy var customRefreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
-        refreshControl.tintColor = .systemBlue
-        //refreshControl.attributedTitle = NSAttributedString(string: "Reload data...", attributes: [.font: UIFont.systemFont(ofSize: 10)])
-        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+            
+            refreshControl.tintColor = .systemBlue
+            //refreshControl.attributedTitle = NSAttributedString(string: "Reload data...", attributes: [.font: UIFont.systemFont(ofSize: 10)])
+            refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        
         return refreshControl
     }()
     
@@ -32,9 +34,9 @@ class MyFriendsViewController: UITableViewController {
     private lazy var searcController: UISearchController = {
         let searcController = UISearchController(searchResultsController: nil)
         
-        searcController.searchResultsUpdater = self
-        searcController.obscuresBackgroundDuringPresentation = false
-        searcController.searchBar.placeholder = "Поиск"
+            searcController.searchResultsUpdater = self
+            searcController.obscuresBackgroundDuringPresentation = false
+            searcController.searchBar.placeholder = "Поиск"
         
         return searcController
     }()
@@ -76,24 +78,26 @@ class MyFriendsViewController: UITableViewController {
             
         
         // Setup tableView
-        tableView.register(GroupHeader.self, forHeaderFooterViewReuseIdentifier: "GroupHeader")
+            tableView.register(GroupHeader.self, forHeaderFooterViewReuseIdentifier: "GroupHeader")
 
-        tableView.refreshControl = customRefreshControl
+            tableView.refreshControl = customRefreshControl
         
         
         // Set up the search controller
-        navigationItem.searchController = searcController
-        definesPresentationContext = true
+            navigationItem.searchController = searcController
+            definesPresentationContext = true
         
         
         // Load data from Network
-        loadDataFromNetwork()
+            loadDataFromNetwork()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
     }
+    
+    
     
     deinit {
         friendCellModelsNotificationToken?.invalidate()
@@ -107,12 +111,20 @@ class MyFriendsViewController: UITableViewController {
             switch changes {
             case let .initial(friends):
                 
-                print("Initialized \(friends.count)")
+                #if DEBUG
+                 print("Initialized \(friends.count)")
+                #endif
                 
             case let .update(_, deletions: deletions, insertions: insertions, modifications: modifications):
                 
                 let section = Sections.third.rawValue
-                
+
+                #if DEBUG
+                 print("deleted \(deletions.count): \(deletions)")
+                 print("inserted \(insertions.count): \(insertions)")
+                 print("modified \(modifications.count): \(modifications)")
+                #endif
+
                 self?.tableView.deleteRows(at: deletions.map { IndexPath(item: $0, section: section) }, with: .automatic)
                 self?.tableView.insertRows(at: insertions.map { IndexPath(item: $0, section: section) }, with: .automatic)
                 self?.tableView.reloadRows(at: modifications.map { IndexPath(item: $0, section: section) }, with: .automatic)
@@ -127,17 +139,24 @@ class MyFriendsViewController: UITableViewController {
             switch changes {
             
             case let .initial(friends):
-                
-                print("Initialized \(friends.count)")
-                
+       
+                #if DEBUG
+                 print("Initialized \(friends.count)")
+                #endif
+
             case let .update(_, deletions: deletions, insertions: insertions, modifications: modifications):
                 
                 let section = Sections.second.rawValue
                 
+                #if DEBUG
+                 print("deleted \(deletions.count): \(deletions)")
+                 print("inserted \(insertions.count): \(insertions)")
+                 print("modified \(modifications.count): \(modifications)")
+                #endif
+                
                 self?.tableView.deleteRows(at: deletions.filter {$0 < 5}.map { IndexPath(item: $0, section: section) }, with: .automatic)
                 self?.tableView.insertRows(at: insertions.filter {$0 < 5}.map { IndexPath(item: $0, section: section) }, with: .automatic)
                 self?.tableView.reloadRows(at: modifications.filter {$0 < 5}.map { IndexPath(item: $0, section: section) }, with: .automatic)
-                
             case let .error(error):
                 print(error.localizedDescription)
             }
@@ -146,8 +165,12 @@ class MyFriendsViewController: UITableViewController {
     }
     
     @objc private func refresh(_ sender: UIRefreshControl) {
+        tableView.beginUpdates()
+        try? self.realmService?.deleteAll()
+        
         loadDataFromNetwork { [weak self] in
             self?.refreshControl?.endRefreshing()
+            self?.tableView.endUpdates()
         }
     }
 }
@@ -223,14 +246,20 @@ extension MyFriendsViewController {
         
         case .second:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendCell") as? FriendCell else { fatalError() }
+            let count = mostImportantFriendCellModels?.count ?? 0
+            let row = indexPath.row
             
-            cell.model = mostImportantFriendCellModels?[indexPath.row]
+            cell.model = row < count ? mostImportantFriendCellModels?[indexPath.row] : nil
             return cell
         
         case .third:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendCell") as? FriendCell else { fatalError() }
             
-            cell.model = friendCellModels?[indexPath.row]
+            let count = friendCellModels?.count ?? 0
+            let row = indexPath.row
+            
+            cell.model = row < count ? friendCellModels?[indexPath.row] : nil
+            
             return cell
         
         case .none:
