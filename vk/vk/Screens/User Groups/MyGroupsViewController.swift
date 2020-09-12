@@ -65,33 +65,33 @@ extension MyGroupsViewController {
         
     }
     
-    func loadUserGroupInvitations() {
-        NetworkService.shared.loadUserGroupInvitations(offset: 0, count: 2, extended: 1) { [weak self] (userGroupInvitationModel) in
-            guard let self = self else { return }
-            
-            self.tableView.beginUpdates()
-            
-            let events = userGroupInvitationModel.response.events
-            let invitorGroups: [Int: [GroupModel]] = Dictionary(grouping: userGroupInvitationModel.response.invitorGroups) { $0.id }
-            let invitorUsers: [Int: [UserModel]] =  Dictionary(grouping: userGroupInvitationModel.response.invitorUsers) { $0.id }
-        
-            for event in events {
-                if let invitor = invitorGroups[abs(event.is_advertiser)]{
-                    let invitor = invitor[0]
-                    let groupInvitationCell = GroupInvitationCellModel(eventImage: event.photo_200, invitorImage: "", eventName: event.name, countOfParticipants: "", invitorName: invitor.name)
-                    self.cellGroupInvitationModels.append(groupInvitationCell)
-                } else if let invitor = invitorUsers[event.is_advertiser] {
-                    let invitor = invitor[0]
-                    let groupInvitationCell = GroupInvitationCellModel(eventImage: event.photo_200, invitorImage: "", eventName: event.name, countOfParticipants: "", invitorName: invitor.lastName)
-                    self.cellGroupInvitationModels.append(groupInvitationCell)
-                }
-            }
-            
-            
-            self.tableView.reloadData()
-            self.tableView.endUpdates()
-        }
-    }
+//    func loadUserGroupInvitations() {
+//        NetworkService.shared.loadUserGroupInvitations(offset: 0, count: 2, extended: 1) { [weak self] (userGroupInvitationModel) in
+//            guard let self = self else { return }
+//            
+//            self.tableView.beginUpdates()
+//            
+//            let events = userGroupInvitationModel.response.events
+//            let invitorGroups: [Int: [GroupModel]] = Dictionary(grouping: userGroupInvitationModel.response.invitorGroups) { $0.id }
+//            let invitorUsers: [Int: [UserModel]] =  Dictionary(grouping: userGroupInvitationModel.response.invitorUsers) { $0.id }
+//        
+//            for event in events {
+//                if let invitor = invitorGroups[abs(event.is_advertiser)]{
+//                    let invitor = invitor[0]
+//                    let groupInvitationCell = GroupInvitationCellModel(eventImage: event.photo_200, invitorImage: "", eventName: event.name, countOfParticipants: "", invitorName: invitor.name)
+//                    self.cellGroupInvitationModels.append(groupInvitationCell)
+//                } else if let invitor = invitorUsers[event.is_advertiser] {
+//                    let invitor = invitor[0]
+//                    let groupInvitationCell = GroupInvitationCellModel(eventImage: event.photo_200, invitorImage: "", eventName: event.name, countOfParticipants: "", invitorName: invitor.lastName)
+//                    self.cellGroupInvitationModels.append(groupInvitationCell)
+//                }
+//            }
+//            
+//            
+//            self.tableView.reloadData()
+//            self.tableView.endUpdates()
+//        }
+//    }
 }
 
 extension MyGroupsViewController: UITableViewDataSource {
