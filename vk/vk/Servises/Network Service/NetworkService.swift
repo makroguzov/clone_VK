@@ -32,28 +32,6 @@ class NetworkService {
             getUserFriends(with: params, complition: complition)
         }
     }
-
-    func loadUserGroupInvitations(offset: Int, count: Int, extended: Int, complitoin: @escaping (UserGroupInvitationModel) -> Void) {
-        let baseUrl = "https://api.vk.com"
-        let path = "/method/groups.getInvites"
-    
-        let params: Parameters = [
-            "access_token": Session.shared.token,
-            "extended": extended,
-            "offset" : offset,
-            "count" : count,
-            "v": "5.92"
-        ]
-    
-        session.request(baseUrl + path, method: .get, parameters: params).responseDecodable { (response: DataResponse<UserGroupInvitationModel, AFError>) in
-            switch response.result {
-                case .success(let userGroupInvitationModel):
-                    complitoin(userGroupInvitationModel)
-                case .failure(let err):
-                    print(err.localizedDescription)
-            }
-        }
-    }
     
     func loadUserGroups(userId: String, extended: Int, filter: String, fields: String, offset: Int, count: Int, complitoin: @escaping (UserGroupsModel) -> Void) {
     let baseUrl = "https://api.vk.com"

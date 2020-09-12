@@ -8,11 +8,9 @@
 
 import Alamofire
 
-struct FriendsParametrs {
-    let baseUrl = "https://api.vk.com"
-    let path = "/method/friends.get"
-    
-    let params: Parameters
+struct FriendsParametrs: RequestParametrizable {
+    var path = "/method/friends.get"
+    var params: Parameters
 
     init(order: String = "", list_id: String = "", count: Int, offset: Int = 0, fields: String = "", name_case: String = "", ref: String = "") {
         
