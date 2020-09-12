@@ -194,13 +194,23 @@ class MyFriendsViewController: UITableViewController {
 extension MyFriendsViewController {
     
     func loadDataFromNetwork(completion: (() -> Void)? = nil) {
-        NetworkService.shared.loadUserFriends(user_id: Session.shared.userId, order: "hints", list_id: "", count: 500, offset: 0, fields: "photo_200,city,bdate", name_case: "", ref: "") { [weak self] (userFriendsModel) in
-
+        
+        let requestParams = FriendsParametrs(order: "hints", count: 500, fields: "photo_200,city,bdate")
+        
+        NetworkService.shared.load(.friends(withParams: requestParams)) { [weak self] (userFriendsModel) in
             DispatchQueue.main.async {
-                try? self?.realmService?.add(objects: userFriendsModel.friends)
+                try? self?.realmService?.add(objects: (userFriendsModel as! UserFriendsModel).friends)
                 completion?()
             }
         }
+        
+//        NetworkService.shared.loadUserFriends(user_id: Session.shared.userId, order: "hints", list_id: "", count: 500, offset: 0, fields: "photo_200,city,bdate", name_case: "", ref: "") { [weak self] (userFriendsModel) in
+//
+//            DispatchQueue.main.async {
+//                try? self?.realmService?.add(objects: userFriendsModel.friends)
+//                completion?()
+//            }
+//        }
     }
 }
 

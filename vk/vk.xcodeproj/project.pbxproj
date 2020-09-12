@@ -44,6 +44,7 @@
 		636C641324F4897D00356F57 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636C641224F4897D00356F57 /* RealmService.swift */; };
 		636C641C24F7EA0100356F57 /* UserPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636C641B24F7EA0100356F57 /* UserPhotosViewController.swift */; };
 		636C641E2500D68900356F57 /* UserFriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636C641D2500D68800356F57 /* UserFriendModel.swift */; };
+		6370CE05250D2BD400F7BDB4 /* FriendsParametrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6370CE04250D2BD400F7BDB4 /* FriendsParametrs.swift */; };
 		63AFAA0C25063CD800B08FFE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63AFAA0B25063CD800B08FFE /* GoogleService-Info.plist */; };
 		63AFAA0E250640CF00B08FFE /* CustomLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFAA0D250640CF00B08FFE /* CustomLoginViewController.swift */; };
 		63AFAA112506446500B08FFE /* ViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AFAA102506446500B08FFE /* ViewControllerExtensions.swift */; };
@@ -130,6 +131,7 @@
 		636C641224F4897D00356F57 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		636C641B24F7EA0100356F57 /* UserPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotosViewController.swift; sourceTree = "<group>"; };
 		636C641D2500D68800356F57 /* UserFriendModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFriendModel.swift; sourceTree = "<group>"; };
+		6370CE04250D2BD400F7BDB4 /* FriendsParametrs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsParametrs.swift; sourceTree = "<group>"; };
 		63AFAA0B25063CD800B08FFE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		63AFAA0D250640CF00B08FFE /* CustomLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoginViewController.swift; sourceTree = "<group>"; };
 		63AFAA102506446500B08FFE /* ViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtensions.swift; sourceTree = "<group>"; };
@@ -328,6 +330,23 @@
 			path = "User Photos";
 			sourceTree = "<group>";
 		};
+		6370CDFE250D0D0F00F7BDB4 /* Network Service */ = {
+			isa = PBXGroup;
+			children = (
+				63D1C8DB24F2E70D00F39111 /* NetworkService.swift */,
+				6370CE03250D2BA000F7BDB4 /* Parametrs Models */,
+			);
+			path = "Network Service";
+			sourceTree = "<group>";
+		};
+		6370CE03250D2BA000F7BDB4 /* Parametrs Models */ = {
+			isa = PBXGroup;
+			children = (
+				6370CE04250D2BD400F7BDB4 /* FriendsParametrs.swift */,
+			);
+			path = "Parametrs Models";
+			sourceTree = "<group>";
+		};
 		63AFAA0F2506441D00B08FFE /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -405,7 +424,7 @@
 				63D1C8E624F2E84B00F39111 /* Models */,
 				63D1C8D924F2E6D600F39111 /* Session.swift */,
 				636C641224F4897D00356F57 /* RealmService.swift */,
-				63D1C8DB24F2E70D00F39111 /* NetworkService.swift */,
+				6370CDFE250D0D0F00F7BDB4 /* Network Service */,
 			);
 			path = Servises;
 			sourceTree = "<group>";
@@ -658,6 +677,7 @@
 				63D1C8FF24F2EA9500F39111 /* GroupInvitationCell.swift in Sources */,
 				63D1C8DF24F2E76E00F39111 /* VKLoginController.swift in Sources */,
 				63D1C8F224F2E96100F39111 /* Post.swift in Sources */,
+				6370CE05250D2BD400F7BDB4 /* FriendsParametrs.swift in Sources */,
 				636C63CC24F4395C00356F57 /* GroupHeader.swift in Sources */,
 				636C641324F4897D00356F57 /* RealmService.swift in Sources */,
 				63D1C8AB24F2E57E00F39111 /* SceneDelegate.swift in Sources */,
