@@ -6,9 +6,10 @@
 //  Copyright © 2020 MACUSER. All rights reserved.
 //
 
+import Foundation
 import Alamofire
 
-protocol RequestParametrizable {
+protocol RequestParametrizable: class {
     var baseUrl: String { get }
     var path: String { get }
     

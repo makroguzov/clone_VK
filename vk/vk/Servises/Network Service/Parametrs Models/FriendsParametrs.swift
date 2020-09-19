@@ -11,7 +11,10 @@ import Alamofire
 struct FriendsParametrs: RequestParametrizable {
     var path = "/method/friends.get"
     var params: Parameters
+    
+    var responseType = UserFriendModel.self
 
+    
     init(order: String = "", list_id: String = "", count: Int, offset: Int = 0, fields: String = "", name_case: String = "", ref: String = "") {
         
         params = [

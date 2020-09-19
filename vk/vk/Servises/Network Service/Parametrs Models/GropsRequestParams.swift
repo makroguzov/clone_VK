@@ -8,10 +8,10 @@
 
 import Alamofire
 
-struct GetGropsRequest: RequestParametrizable {
+struct GropsRequestParams: RequestParametrizable {
     var path = "/method/groups.get"
     var params: Parameters
-
+    
     init(userId: String = Session.shared.userId, extended: Int, filter: String, fields: String, offset: Int, count: Int) {
          
         params = [

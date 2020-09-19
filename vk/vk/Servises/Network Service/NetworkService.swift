@@ -21,45 +21,23 @@ class NetworkService {
         return session
     }()
     
-    enum Request {
-        case friends(withParams: FriendsParametrs)
+    
+    enum Request: Any {
+        case getUserFriends(withParams: FriendsParametrs)
+        case getUserGroups(withParams: GropsRequestParams)
     }
+    
 
     func load(_ request: Request, complition: @escaping ( (Any) -> Void )) {
-        
         switch request {
-        case let .friends(withParams: params):
-            getUserFriends(with: params, complition: complition)
+        case let .getUserFriends(withParams: params):
+            loadData(with: params, complition: complition)
+        case let .getUserGroups(withParams: params):
+            loadData(with: params, complition: complition)
         }
     }
-    
-    func loadUserGroups(userId: String, extended: Int, filter: String, fields: String, offset: Int, count: Int, complitoin: @escaping (UserGroupsModel) -> Void) {
-    let baseUrl = "https://api.vk.com"
-    let path = "/method/groups.get"
-    
-    let params: Parameters = [
-        "access_token": Session.shared.token,
-        "user_id" : userId,
-        "extended": extended,
-        "filter" : filter,
-        "fields" : fields,
-        "offset" : offset,
-        "count" : count,
-        "v": "5.92"
-    ]
-
-    session.request(baseUrl + path, method: .get, parameters: params).responseDecodable { (response: DataResponse<UserGroupsModel, AFError>) in
-        switch response.result {
-        case .success(let userGroupModel):
-            complitoin(userGroupModel)
-        case .failure(let err):
-            print(err.localizedDescription)
-        }
-    }
-    
-}
         
-    private func getUserFriends(with params: FriendsParametrs, complition: @escaping (UserFriendsModel) -> Void) {
+    private func loadData<T: RequestParametrizable>(with params: T, complition: @escaping (Any) -> Void) {
         session.request(params.baseUrl + params.path, method: .get, parameters: params.params).responseDecodable() {
             (response: DataResponse<Response<UserFriendsModel>, AFError>) in
             
