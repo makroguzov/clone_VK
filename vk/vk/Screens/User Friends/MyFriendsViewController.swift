@@ -25,22 +25,14 @@ class MyFriendsViewController: UITableViewController {
         let refreshControl = UIRefreshControl()
             
             refreshControl.tintColor = .systemBlue
-            //refreshControl.attributedTitle = NSAttributedString(string: "Reload data...", attributes: [.font: UIFont.systemFont(ofSize: 10)])
             refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         
         return refreshControl
     }()
     
     
-    private lazy var searcController: UISearchController = {
-        let searcController = UISearchController(searchResultsController: nil)
+    private lazy var searcController: UISearchController = UISearchController(searchResultsController: nil)
         
-            searcController.searchResultsUpdater = self
-            searcController.obscuresBackgroundDuringPresentation = false
-            searcController.searchBar.placeholder = "Поиск"
-        
-        return searcController
-    }()
     private var searchBarIsEmpty: Bool {
         guard let text = searcController.searchBar.text else { return false }
         return text.isEmpty
@@ -61,12 +53,10 @@ class MyFriendsViewController: UITableViewController {
     
     
     private var mostImportantFriendCellModels: Results<UserFriendModel>? {
-        let users: Results<UserFriendModel>? = realmService?.getObjects()
-        return users
+        return realmService?.getObjects()
     }
     private var friendCellModels: Results<UserFriendModel>? {
-        let users: Results<UserFriendModel>? = realmService?.getObjects().sorted(byKeyPath: "id")
-        return users
+        return realmService?.getObjects().sorted(byKeyPath: "id")
     }
     private var filteredFriendCellModels: Results<UserFriendModel>?
 
@@ -75,27 +65,11 @@ class MyFriendsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupTableView()
+        setupSearchController()
         createNotifications()
-            
-        
-        // Setup tableView
-            tableView.register(GroupHeader.self, forHeaderFooterViewReuseIdentifier: "GroupHeader")
 
-            tableView.refreshControl = customRefreshControl
-        
-        
-        // Set up the search controller
-            navigationItem.searchController = searcController
-            definesPresentationContext = true
-        
-        
-        // Load data from Network
-            loadDataFromNetwork()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
+        loadDataFromNetwork()
     }
     
     deinit {
@@ -103,6 +77,21 @@ class MyFriendsViewController: UITableViewController {
         mostImportantFriendCellModelsNotificationToken?.invalidate()
     }
     
+    
+    
+    private func setupTableView() {
+        tableView.register(GroupHeader.self, forHeaderFooterViewReuseIdentifier: "GroupHeader")
+        tableView.refreshControl = customRefreshControl
+    }
+    
+    private func setupSearchController() {
+        navigationItem.searchController = searcController
+        definesPresentationContext = true
+        
+        searcController.searchResultsUpdater = self
+        searcController.obscuresBackgroundDuringPresentation = false
+        searcController.searchBar.placeholder = "Поиск"
+    }
     
     private func createNotifications() {
         
@@ -169,16 +158,16 @@ class MyFriendsViewController: UITableViewController {
         })
     }
     
+    
+    
     @objc private func refresh(_ sender: UIRefreshControl) {
-        tableView.beginUpdates()
+        
         try? self.realmService?.deleteAll()
         
         loadDataFromNetwork { [weak self] in
             self?.refreshControl?.endRefreshing()
-            self?.tableView.endUpdates()
         }
     }
-
 
     @IBAction func logOutAction(_ sender: UIBarButtonItem) {
         do {
@@ -194,23 +183,14 @@ class MyFriendsViewController: UITableViewController {
 extension MyFriendsViewController {
     
     func loadDataFromNetwork(completion: (() -> Void)? = nil) {
-        
         let requestParams = FriendsParametrs(order: "hints", count: 500, fields: "photo_200,city,bdate")
-        
-        NetworkService.shared.load(.friends(withParams: requestParams)) { [weak self] (userFriendsModel) in
+    
+        NetworkService.shared.load(.getUserFriends(withParams: requestParams)) { [weak self] (userFriendsModel) in
             DispatchQueue.main.async {
                 try? self?.realmService?.add(objects: (userFriendsModel as! UserFriendsModel).friends)
                 completion?()
             }
         }
-        
-//        NetworkService.shared.loadUserFriends(user_id: Session.shared.userId, order: "hints", list_id: "", count: 500, offset: 0, fields: "photo_200,city,bdate", name_case: "", ref: "") { [weak self] (userFriendsModel) in
-//
-//            DispatchQueue.main.async {
-//                try? self?.realmService?.add(objects: userFriendsModel.friends)
-//                completion?()
-//            }
-//        }
     }
 }
 

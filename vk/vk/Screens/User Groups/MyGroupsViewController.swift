@@ -25,73 +25,19 @@ class MyGroupsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getInitData()
+        getGroupsFromNetwork()
     }
 }
 
 extension MyGroupsViewController {
-    func getInitData() {
-        getGroups(count: 100)
-        //loadUserGroupInvitations()
-    }
-    
-    func getGroups(count: Int){
-        NetworkService.shared.loadUserGroups(userId: Session.shared.userId, extended: 1, filter: "", fields: "", offset: 0, count: count) { [weak self] (userGroupModel) in
-            guard let self = self else { return }
-            
-            self.tableView.beginUpdates()
-            
-            let totalGroupsCount = userGroupModel.response.count
-            let groups = userGroupModel.response.groups
-            
-            let numberOfRows = self.cellGroupModels.count
-            self.tableView.insertRows(at: Array(numberOfRows ..< numberOfRows + groups.count).map { IndexPath(row: $0, section: 1) }, with: .automatic)
+    func getGroupsFromNetwork(){
 
-            
-            for group in groups {
-                let groupCellModel = GroupCellModel(image: group.photo_200, groupName: group.name, groupSubtitle: group.screen_name)
-                self.cellGroupModels.append(groupCellModel)
-            }
-            self.totalGroupsCount = totalGroupsCount
-
-            self.offset += count
-            
-            self.tableView.reloadData()
-            self.tableView.endUpdates()
-        }
     }
     
     func getFilteredGroups() {
         
     }
     
-//    func loadUserGroupInvitations() {
-//        NetworkService.shared.loadUserGroupInvitations(offset: 0, count: 2, extended: 1) { [weak self] (userGroupInvitationModel) in
-//            guard let self = self else { return }
-//            
-//            self.tableView.beginUpdates()
-//            
-//            let events = userGroupInvitationModel.response.events
-//            let invitorGroups: [Int: [GroupModel]] = Dictionary(grouping: userGroupInvitationModel.response.invitorGroups) { $0.id }
-//            let invitorUsers: [Int: [UserModel]] =  Dictionary(grouping: userGroupInvitationModel.response.invitorUsers) { $0.id }
-//        
-//            for event in events {
-//                if let invitor = invitorGroups[abs(event.is_advertiser)]{
-//                    let invitor = invitor[0]
-//                    let groupInvitationCell = GroupInvitationCellModel(eventImage: event.photo_200, invitorImage: "", eventName: event.name, countOfParticipants: "", invitorName: invitor.name)
-//                    self.cellGroupInvitationModels.append(groupInvitationCell)
-//                } else if let invitor = invitorUsers[event.is_advertiser] {
-//                    let invitor = invitor[0]
-//                    let groupInvitationCell = GroupInvitationCellModel(eventImage: event.photo_200, invitorImage: "", eventName: event.name, countOfParticipants: "", invitorName: invitor.lastName)
-//                    self.cellGroupInvitationModels.append(groupInvitationCell)
-//                }
-//            }
-//            
-//            
-//            self.tableView.reloadData()
-//            self.tableView.endUpdates()
-//        }
-//    }
 }
 
 extension MyGroupsViewController: UITableViewDataSource {
