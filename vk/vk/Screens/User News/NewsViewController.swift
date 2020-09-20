@@ -6,4 +6,12 @@
 //  Copyright © 2020 MACUSER. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class NewsViewController: UIViewController {
+    @IBOutlet weak var tableView: UITableView!
+    
+    override func viewDidload() {
+        
+    }
+}

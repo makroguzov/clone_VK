@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-protocol RequestParametrizable: class {
+protocol RequestParametrizable {
     var baseUrl: String { get }
     var path: String { get }
     
