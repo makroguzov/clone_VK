@@ -8,6 +8,7 @@
 
 import UIKit
 
-class PostCreatorInformationTableViewHeader: UITableViewHeaderFooterView {
+class PostCreatorInformationTableViewHeader: UITableViewCell {
+    static var identifier: String = "PostCreatorInformationHeader"
     
 }

@@ -21,25 +21,10 @@ class NetworkService {
         return session
     }()
     
-    
-    enum Request: Any {
-        case getUserFriends(withParams: FriendsParametrs)
-        case getUserGroups(withParams: GropsRequestParams)
-    }
-    
-
-    func load(_ request: Request, complition: @escaping ( (Any) -> Void )) {
-        switch request {
-        case let .getUserFriends(withParams: params):
-            loadData(with: params, complition: complition)
-        case let .getUserGroups(withParams: params):
-            loadData(with: params, complition: complition)
-        }
-    }
-        
-    private func loadData<T: RequestParametrizable>(with params: T, complition: @escaping (Any) -> Void) {
-        session.request(params.baseUrl + params.path, method: .get, parameters: params.params).responseDecodable() {
-            (response: DataResponse<Response<UserFriendsModel>, AFError>) in
+            
+    func loadData<T: Codable>(with params: VKRequestParametrs, complition: @escaping (T) -> Void) {
+        session.request(params.baseUrl + params.path.rawValue, method: .get, parameters: params.params).responseDecodable() {
+            (response: DataResponse<Response<T>, AFError>) in
             
             switch response.result {
             case .success(let result):
