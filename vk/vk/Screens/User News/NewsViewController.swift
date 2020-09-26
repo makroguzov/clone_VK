@@ -59,6 +59,7 @@ extension NewsViewController: UITableViewDelegate {
 }
 
 extension NewsViewController: UITableViewDataSource {
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return postFactory.numberOfSections(tableView)
     }

@@ -315,7 +315,6 @@
 				636C641824F4E5C000356F57 /* Components */,
 				636C63C924F4392300356F57 /* MyFriendsViewController.swift */,
 				6370CE0E250D3A6C00F7BDB4 /* UserFriends.storyboard */,
-				6370CE0D250D3A5300F7BDB4 /* New Group */,
 			);
 			path = "User Friends";
 			sourceTree = "<group>";
@@ -357,13 +356,6 @@
 				63D1C8E624F2E84B00F39111 /* Models */,
 			);
 			path = "Network Service";
-			sourceTree = "<group>";
-		};
-		6370CE0D250D3A5300F7BDB4 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		6370CE162516544E00F7BDB4 /* User News */ = {
