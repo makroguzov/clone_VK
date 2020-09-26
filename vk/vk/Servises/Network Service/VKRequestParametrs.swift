@@ -19,7 +19,7 @@ struct VKRequestParametrs {
     let baseUrl: String = "https://api.vk.com"
     var path: LoadDataType
     
-    var params: Parameters
+    var params: Parameters = [:]
 }
 
 
