@@ -8,7 +8,7 @@
 
 import UIKit
 import RealmSwift
-import Firebase
+//import Firebase
 
 extension MyFriendsViewController {
     enum Sections: Int, CaseIterable {
@@ -169,13 +169,13 @@ class MyFriendsViewController: UITableViewController {
         }
     }
 
-    @IBAction func logOutAction(_ sender: UIBarButtonItem) {
-        do {
-            try Auth.auth().signOut()
-        } catch {
-            showAlert(title: "error", message: error.localizedDescription)
-        }
-    }
+//    @IBAction func logOutAction(_ sender: UIBarButtonItem) {
+//        do {
+//            try Auth.auth().signOut()
+//        } catch {
+//            showAlert(title: "error", message: error.localizedDescription)
+//        }
+//    }
 }
 
 //MARK: - Network
@@ -183,11 +183,17 @@ class MyFriendsViewController: UITableViewController {
 extension MyFriendsViewController {
     
     func loadDataFromNetwork(completion: (() -> Void)? = nil) {
-        NetworkService.shared.loadData(with: .init(path: .friends, params: [
-                "order": "hints",
-                "count": 500,
-                "fields": "photo_200,city,bdate"
-        ])) { [weak self] (userFriendsModel: UserFriendsModel) in
+        let request = VKRequestParametrs()
+        request.set(path: .friends)
+        
+        let params: [String: Any] = [
+            "order": "hints",
+            "count": 500,
+            "fields": "photo_200,city,bdate"
+        ]
+        request.set(params: params)
+        
+        NetworkService.shared.loadData(with: request) { [weak self] (userFriendsModel: UserFriendsModel) in
             DispatchQueue.main.async {
                 try? self?.realmService?.add(objects: userFriendsModel.friends)
                 completion?()

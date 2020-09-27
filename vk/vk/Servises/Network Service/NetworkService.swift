@@ -23,7 +23,7 @@ class NetworkService {
     
     
     func loadData<T: Codable>(with params: VKRequestParametrs, complition: @escaping (T) -> Void) {
-        session.request(params.baseUrl + params.path.rawValue, method: .get, parameters: params.params).responseDecodable() {
+        session.request(params.getBaseUrl() + params.getPath(), method: .get, parameters: params.getParams()).responseDecodable(queue: .global()) {
             (response: DataResponse<Response<T>, AFError>) in
             
             switch response.result {
@@ -34,5 +34,18 @@ class NetworkService {
                 print(error.localizedDescription)
             }
         }
-    }    
+    }
+
+    func loadJSON(with params: VKRequestParametrs) {
+        session.request(params.getBaseUrl() + params.getPath(), method: .get, parameters: params.getParams()).responseJSON { response in
+    
+            switch response.result {
+            case let .success(json):
+                print(json)                
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
+        }
+        
+    }
 }
