@@ -19,18 +19,3 @@ struct UserFriendsModel: Codable {
     var friends: [UserFriendModel]
 }
 
-//struct UserFriendsModel: Decodable {
-//    let response: Response
-//}
-//
-//extension UserFriendsModel {
-//    struct Response: Decodable {
-//        enum CodingKeys: String, CodingKey {
-//            case users = "items"
-//            case count
-//        }
-//
-//        let count: Int
-//        let users: [UserModel]
-//    }
-//}

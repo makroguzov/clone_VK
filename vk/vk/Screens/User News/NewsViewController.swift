@@ -26,34 +26,43 @@ class NewsViewController: UIViewController {
     }
     
     private func loadDataFromNetwork() {
+        let request = VKRequestParametrs()
+        request.set(path: .newsfeed)
         
+        NetworkService.shared.loadData(with: request) { [weak self] (newsFeed: NewsFeed) in
+            guard let self = self else {
+                print("load data error.")
+                return
+            }
+            self.postFactory.setUp(self.tableView, with: newsFeed)
+        }
     }
 }
 
 extension NewsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return postFactory.heightForHeaderInSection(tableView, heightForHeaderInSection: section)
+        return postFactory.heightForHeaderInSection(heightForHeaderInSection: section)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return postFactory.viewForHeaderInSection(tableView, viewForHeaderInSection: section)
+        return postFactory.viewForHeaderInSection(viewForHeaderInSection: section)
     }
     
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return postFactory.heightForRowAt(tableView, heightForRowAt: indexPath)
+        return postFactory.heightForRowAt(heightForRowAt: indexPath)
     }
     
     
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return postFactory.heightForFooterInSection(tableView, heightForFooterInSection: section)
+        return postFactory.heightForFooterInSection(heightForFooterInSection: section)
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return postFactory.viewForFooterInSection(tableView, viewForFooterInSection: section)
+        return postFactory.viewForFooterInSection(viewForFooterInSection: section)
     }
     
 }
@@ -61,14 +70,14 @@ extension NewsViewController: UITableViewDelegate {
 extension NewsViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return postFactory.numberOfSections(tableView)
+        return postFactory.numberOfSections()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return postFactory.numberOfRowsInSection(tableView, section: section)
+        return postFactory.numberOfRowsInSection(section: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return postFactory.cellForRowAt(tableView, cellForRowAt: indexPath)
+        return postFactory.cellForRowAt(cellForRowAt: indexPath)
     }
 }
