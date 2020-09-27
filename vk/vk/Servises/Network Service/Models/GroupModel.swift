@@ -8,20 +8,30 @@
 
 import Foundation
 
-struct GroupModel: Decodable {
+struct GroupModel: Codable {
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case isAdmin = "is_admin"
+        case isAdvertiser = "is_advertiser"
+        case isClosed = "is_closed"
+        case isMember = "is_member"
+        case name
+        case screenName = "screen_name"
+        case photo = "photo_100"
+    }
+    
     let id: Int
     
-    let is_admin: Int
-    let is_advertiser: Int
-    let is_closed: Int
-    let is_member: Int
+    let isAdmin: Int
+    let isAdvertiser: Int
+    let isClosed: Int
+    let isMember: Int
     
     let name: String
-    let screen_name: String
+    let screenName: String
 
-    let photo_100: String?
-    let photo_200: String?
-    let photo_50: String?
-    
-//    let type: String
+    let photo: String?
+    //let photo_200: String?
+    //let photo_50: String?
 }

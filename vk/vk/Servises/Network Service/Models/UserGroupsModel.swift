@@ -8,19 +8,13 @@
 
 import Foundation
 
-struct UserGroupsModel: Decodable {
-    let response: Response
-}
-
-extension UserGroupsModel {
-    struct Response: Decodable {
-        enum CodingKeys: String, CodingKey {
-            case groups = "items"
-            case count
-        }
-
-        let count: Int
-        let groups: [GroupModel]
+struct UserGroupsModel: Codable {
+    enum CodingKeys: String, CodingKey {
+        case groups = "items"
+        case count
     }
+    
+    let count: Int
+    let groups: [GroupModel]
 }
 

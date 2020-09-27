@@ -7,87 +7,112 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class MyGroupsViewController: UIViewController {
-    @IBOutlet weak var tableView: UITableView! {
-        didSet {
-            tableView.delegate = self
-            tableView.dataSource = self
-        }
-    }
+    @IBOutlet private weak var tableView: UITableView!
     
-    private var cellGroupModels = [GroupCellModel]()
-    private var totalGroupsCount: Int = 0
-    private var offset: Int = 0
+    private let group = DispatchGroup()
+
     
-    private var cellGroupInvitationModels = [GroupInvitationCellModel]()
+    private var viewModel: GroupsViewModel!
+    private let progressHud = JGProgressHUD(style: .dark)
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getGroupsFromNetwork()
+        viewModel = GroupsViewModel(tableView: tableView)
+        
+        setUpTableView()
+        loadData()
+    }
+    
+    private func setUpTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
     }
 }
 
 extension MyGroupsViewController {
-    func getGroupsFromNetwork(){
-
-    }
-    
-    func getFilteredGroups() {
+    private func loadData() {
         
+        progressHud.show(in: self.view, animated: true)
+        
+        
+        DispatchQueue.global(qos: .userInteractive).async(group: group) { [weak self] in
+            self?.loadGroups()
+        }
+
+        DispatchQueue.global(qos: .userInteractive).async(group: group) { [weak self] in
+            self?.loadInvitations()
+        }
+       
+        group.notify(queue: .main) { [weak self] in
+            print(123)
+            
+            self?.tableView.reloadData()
+            self?.progressHud.dismiss(animated: true)
+        }
     }
     
+    private func loadGroups(){
+        let request = VKRequestParametrs()
+        request.set(path: .groups)
+
+        let params: [String: Any] = [
+            "user_id": Session.shared.userId,
+            "extended": 1
+        ]
+        request.set(params: params)
+        
+        NetworkService.shared.loadData(with: request) { [weak self] (groups: UserGroupsModel) in
+            DispatchQueue.global(qos: .userInteractive).async(group: self?.group) {
+                self?.viewModel.setUp(with: groups)
+            }
+        }
+    }
+        
+    private func loadInvitations() {
+        let request = VKRequestParametrs()
+        request.set(path: .invites)
+        
+        let params: [String: Any] = [
+            "user_id": Session.shared.userId,
+            "extended": 1
+        ]
+        request.set(params: params)
+        
+        NetworkService.shared.loadData(with: request) { [weak self] (invitations: UserGroupInvitationModel) in
+            DispatchQueue.global(qos: .userInteractive).async(group: self?.group) {
+                self?.viewModel.setUp(with: invitations)
+            }
+        }
+    }
+  
 }
 
 extension MyGroupsViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        viewModel.numberOfSections()
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 1:
-            return "Все сообщества \(totalGroupsCount)"
-        default:
-            return "Приглашения"
-        }
+        viewModel.titleForHeaderInSection(section: section)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 1:
-            return cellGroupModels.count
-        default:
-            return 2
-        }
+        viewModel.numberOfRowsInSection(section: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 1:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupCell") as? GroupCell else {
-                fatalError()
-            }
-            
-            cell.model = cellGroupModels[indexPath.row]
-            
-            return cell
-        default:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupInvitationCell") as? GroupInvitationCell else {
-                fatalError()
-            }
-            
-            cell.model =  .emptyState //cellGroupInvitationModels[indexPath.row]
-            
-            return cell
-        }
+        viewModel.cellForRowAt(indexPath: indexPath)
     }
 }
 
 extension MyGroupsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.section == 1 ? 70 : 110
+        viewModel.heightForRowAt(indexPath: indexPath)
     }
     
 }

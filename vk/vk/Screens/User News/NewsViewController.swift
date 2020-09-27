@@ -26,7 +26,10 @@ class NewsViewController: UIViewController {
     }
     
     private func loadDataFromNetwork() {
-        NetworkService.shared.loadData(with: .init(path: .newsfeed)) { [weak self] (newsFeed: NewsFeed) in
+        let request = VKRequestParametrs()
+        request.set(path: .newsfeed)
+        
+        NetworkService.shared.loadData(with: request) { [weak self] (newsFeed: NewsFeed) in
             guard let self = self else {
                 print("load data error.")
                 return

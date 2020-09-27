@@ -8,41 +8,47 @@
 
 import Foundation
 
-struct UserGroupInvitationModel: Decodable {
-    let response: Response
-}
-
-extension UserGroupInvitationModel {
-    struct Response: Decodable {
-        enum CodingKeys: String, CodingKey {
-            case invitorGroups = "groups"
-            case invitorUsers = "profiles"
-            case events = "items"
-            case count
-        }
-
-        let count: Int
-        let invitorGroups: [GroupModel]
-        let invitorUsers: [UserModel]
-        let events: [Event]
-        
+struct UserGroupInvitationModel: Codable {
+    enum CodingKeys: String, CodingKey {
+        case invitorGroups = "groups"
+        case invitorUsers = "profiles"
+        case events = "items"
+        case count
     }
+    
+    let count: Int
+    let invitorGroups: [GroupModel]
+    let invitorUsers: [UserModel]
+    let events: [Event]
 }
 
 extension UserGroupInvitationModel {
-    struct Event: Decodable {
+    struct Event: Codable {
+        
+        enum Codingkeys: String, CodingKey {
+            case id
+            case isAdmin = "is_admin"
+            case isAdvertiser = "is_advertiser"
+            case isClosed = "is_closed"
+            case isMember = "is_member"
+            case name
+            case screenName = "screen_name"
+            case photo = "photo_200"
+        }
+        
+        
         let id: Int
         
-        let is_admin: Int
-        let is_advertiser: Int
-        let is_closed: Int
-        let is_member: Int
+        let isAdmin: Int
+        let isAdvertiser: Int
+        let isClosed: Int
+        let isMember: Int
         
         let name: String
-        let screen_name: String
+        let screenName: String
         
-        let photo_200: String?
-
+        let photo: String?
+        
     }
 }
 
