@@ -19,7 +19,7 @@ class GroupCell: UITableViewCell {
     @IBOutlet weak var groupSubTitleLable: UILabel!
     
     static let identifier = "GroupCell"
-    static let heigth: CGFloat = 80
+    static let heigth: CGFloat = 60
     
     var model: GroupCellModel = .emptyState {
         didSet{

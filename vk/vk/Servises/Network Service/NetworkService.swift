@@ -37,10 +37,15 @@ class NetworkService {
     }
 
     func loadJSON(with params: VKRequestParametrs) {
-        session.request(params.getBaseUrl() + params.getPath(), method: .get, parameters: params.getParams()).responseJSON { json in
-            print(json)
+        session.request(params.getBaseUrl() + params.getPath(), method: .get, parameters: params.getParams()).responseJSON { response in
+    
+            switch response.result {
+            case let .success(json):
+                print(json)                
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
         }
-
+        
     }
-
 }

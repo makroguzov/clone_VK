@@ -41,16 +41,16 @@ extension MyGroupsViewController {
         
         
         DispatchQueue.global(qos: .userInteractive).async(group: group) { [weak self] in
+            self?.group.enter()
             self?.loadGroups()
         }
 
         DispatchQueue.global(qos: .userInteractive).async(group: group) { [weak self] in
+            //self?.group.enter()
             self?.loadInvitations()
         }
        
         group.notify(queue: .main) { [weak self] in
-            print(123)
-            
             self?.tableView.reloadData()
             self?.progressHud.dismiss(animated: true)
         }
@@ -67,7 +67,8 @@ extension MyGroupsViewController {
         request.set(params: params)
         
         NetworkService.shared.loadData(with: request) { [weak self] (groups: UserGroupsModel) in
-            DispatchQueue.global(qos: .userInteractive).async(group: self?.group) {
+            DispatchQueue.global(qos: .userInteractive).async {
+                self?.group.leave()
                 self?.viewModel.setUp(with: groups)
             }
         }
@@ -83,13 +84,15 @@ extension MyGroupsViewController {
         ]
         request.set(params: params)
         
+        NetworkService.shared.loadJSON(with: request)
+        
         NetworkService.shared.loadData(with: request) { [weak self] (invitations: UserGroupInvitationModel) in
-            DispatchQueue.global(qos: .userInteractive).async(group: self?.group) {
+            DispatchQueue.global(qos: .userInteractive).async {
+                self?.group.leave()
                 self?.viewModel.setUp(with: invitations)
             }
         }
     }
-  
 }
 
 extension MyGroupsViewController: UITableViewDataSource {

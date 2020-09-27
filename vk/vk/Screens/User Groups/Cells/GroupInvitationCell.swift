@@ -38,7 +38,7 @@ class GroupInvitationCell: UITableViewCell {
     @IBOutlet private weak var invitorNameLable: UILabel!
     
     static let identifier = "GroupInvitationCell"
-    static let heigth: CGFloat = 110
+    static let heigth: CGFloat = 100
 
     var model: GroupInvitationCellModel = .emptyState {
         didSet {

@@ -17,9 +17,9 @@ struct UserGroupInvitationModel: Codable {
     }
     
     let count: Int
-    let invitorGroups: [GroupModel]
-    let invitorUsers: [UserModel]
-    let events: [Event]
+    var invitorGroups: [GroupModel]
+    var invitorUsers: [Profile]
+    var events: [Event]
 }
 
 extension UserGroupInvitationModel {
@@ -27,28 +27,42 @@ extension UserGroupInvitationModel {
         
         enum Codingkeys: String, CodingKey {
             case id
+            case invitedBy = "invited_by"
             case isAdmin = "is_admin"
             case isAdvertiser = "is_advertiser"
             case isClosed = "is_closed"
             case isMember = "is_member"
             case name
             case screenName = "screen_name"
-            case photo = "photo_200"
+            case photo = "photo_100"
         }
-        
         
         let id: Int
         
+        let invitedBy: Int
+        
         let isAdmin: Int
         let isAdvertiser: Int
-        let isClosed: Int
+        let isClosed: Bool
         let isMember: Int
         
         let name: String
         let screenName: String
         
-        let photo: String?
+        let photo: String
+    }
+
+    struct Profile: Codable {
         
+        enum CodingKeys: String, CodingKey {
+            case id
+            case firstName = "first_name"
+            case lastName = "last_name"
+        }
+        
+        let id: Int
+        let firstName: String
+        let lastName: String
     }
 }
 

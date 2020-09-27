@@ -31,11 +31,12 @@ class GroupsViewModel {
             let model = GroupCellModel(image: group.photo, groupName: group.name, groupSubtitle: group.screenName)
             cellGroupModels.append(model)
         }
-        
-        print(12)
     }
     
     func setUp(with invitations: UserGroupInvitationModel) {
+        for _ in 0..<2 {
+            cellGroupInvitationModels.append(.emptyState)
+        }
         
     }
     
@@ -95,13 +96,12 @@ class GroupsViewModel {
     }
     
     private func getInvitationCellAt(_ indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
-        //        guard let cell = tableView.dequeueReusableCell(withIdentifier: GroupInvitationCell.identifier) as? GroupInvitationCell else {
-//            fatalError()
-//        }
-//
-//        cell.model = cellGroupInvitationModels[indexPath.row]
-//        return cell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: GroupInvitationCell.identifier) as? GroupInvitationCell else {
+            fatalError()
+        }
+
+        cell.model = .emptyState //cellGroupInvitationModels[indexPath.row]
+        return cell
     }
     
     func heightForRowAt(indexPath: IndexPath) -> CGFloat {
