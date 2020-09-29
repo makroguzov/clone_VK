@@ -20,9 +20,9 @@ struct Geo: Codable {
     
     let placeId: Int
     let title: String
-    let type: String
-    let countryId: Int
-    let cityId: Int
-    let address: String
+    let type: String?
+    let countryId: Int?
+    let cityId: Int?
+    let address: String?
 
 }

@@ -8,18 +8,31 @@
 
 import UIKit
 
-class Post: Codable {
-    let type: String 
-    let source_id: Int
-    let date: String
- 
-    let text: String?
-    let photos: Photo?
-    let geo: Geo?
+struct Post: Codable {
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "post_id"
+        case sourceId = "source_id"
 
-    let coments: Comment
-    let likes: Like
-    let reposts: Repost
+        case date
+        case text
+//        case geo
+
+        case comments
+        case likes
+        case reposts
+    }
+    
+    let id: Int
+    let sourceId: Int?
+
+    let date: Int?
+    let text: String?
+//    let geo: Geo?
+
+    let comments: Comment?
+    let likes: Like?
+    let reposts: Repost?
     //let attacments: Attacments
     
 }

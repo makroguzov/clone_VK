@@ -84,8 +84,6 @@ extension MyGroupsViewController {
         ]
         request.set(params: params)
         
-        NetworkService.shared.loadJSON(with: request)
-        
         NetworkService.shared.loadData(with: request) { [weak self] (invitations: UserGroupInvitationModel) in
             DispatchQueue.global(qos: .userInteractive).async {
                 self?.group.leave()

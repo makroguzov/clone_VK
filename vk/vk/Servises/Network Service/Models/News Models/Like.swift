@@ -17,8 +17,8 @@ struct Like: Codable {
     }
     
     let count: Int
-    let isUserLike: Bool
-    let canLike: Bool
-    let canPublish: Bool
+    let isUserLike: Int
+    let canLike: Int
+    let canPublish: Int
     
 }

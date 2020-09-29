@@ -41,7 +41,14 @@ class NetworkService {
     
             switch response.result {
             case let .success(json):
-                print(json)                
+                
+                guard let response = (json as? [String: Any])?["response"] as? [String: Any] else {
+                    return
+                }
+                
+                let items = response["items"] //as? [String: Any]
+                print(items)
+                
             case let .failure(error):
                 print(error.localizedDescription)
             }

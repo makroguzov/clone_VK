@@ -404,7 +404,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostCreatorInformationHeader" rowHeight="80" id="JzF-I6-qIA" customClass="PostCreatorInformationTableViewHeader" customModule="vk" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostCreatorInfcell" rowHeight="80" id="JzF-I6-qIA" customClass="PostCreatorInfCell" customModule="vk" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JzF-I6-qIA" id="JJJ-Dc-336">
@@ -457,6 +457,12 @@
                                                 <constraint firstAttribute="bottom" secondItem="ui5-KG-Mh9" secondAttribute="bottom" constant="10" id="vIR-Q9-25G"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="creatorImageView" destination="lwD-sV-qIj" id="7YF-r4-il4"/>
+                                            <outlet property="nameLable" destination="1ll-oD-LKf" id="Nrx-Gg-cWA"/>
+                                            <outlet property="settingsButton" destination="KJz-3a-sq5" id="Gtt-pF-ieT"/>
+                                            <outlet property="subtitleLable" destination="hBa-uW-zCb" id="p1s-J0-kTa"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextPostCell" id="WZ6-Lx-fx7" customClass="TextPostTableViewCell" customModule="vk" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="135.5" width="414" height="100"/>
@@ -487,7 +493,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostBottomButtonsFooter" id="Pxb-9O-Xhz" customClass="PostBottomButtonsTableViewFooter" customModule="vk" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostBottomButtonsCell" id="Pxb-9O-Xhz" customClass="PostBottomButtonsCell" customModule="vk" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="335.5" width="414" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Pxb-9O-Xhz" id="jYc-uK-6Nj">
@@ -558,6 +564,14 @@
                                             <constraint firstAttribute="width" secondItem="BeF-c5-laJ" secondAttribute="width" multiplier="20.7" id="AtV-SN-QNf"/>
                                             <constraint firstAttribute="height" secondItem="BeF-c5-laJ" secondAttribute="height" multiplier="5" id="Up7-9o-oSe"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="commentButton" destination="pH1-ii-xnY" id="faY-n3-g4Q"/>
+                                            <outlet property="commentLable" destination="iA0-fR-hzU" id="0j2-9m-dl5"/>
+                                            <outlet property="likeButton" destination="BeF-c5-laJ" id="UFW-RT-Tby"/>
+                                            <outlet property="likeLable" destination="qPd-B4-9Es" id="j7v-eT-fhR"/>
+                                            <outlet property="sharedButton" destination="Fz2-yS-fzb" id="gbn-7V-zL0"/>
+                                            <outlet property="sharedLable" destination="hR3-dL-SVF" id="qvx-F0-KgV"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

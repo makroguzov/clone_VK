@@ -11,10 +11,12 @@ import Foundation
 struct NewsFeed: Codable {
     enum CodingKeys: String, CodingKey {
         case posts = "items"
-        //case profiles
-        //case groups
+        case profiles
+        case groups
         //case newOffset = "new_offset"
     }
 
+    var profiles: [UserModel]
+    var groups: [GroupModel]
     var posts: [Post]
 }

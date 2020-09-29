@@ -11,11 +11,13 @@ import UIKit
 class NewsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
-    private var postFactory: PostFactory = PostFactory()
+    private var viewModel: NewsViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        viewModel = NewsViewModel(tableView)
+        
         setUpTableView()
         loadDataFromNetwork()
     }
@@ -29,12 +31,10 @@ class NewsViewController: UIViewController {
         let request = VKRequestParametrs()
         request.set(path: .newsfeed)
         
+        //NetworkService.shared.loadJSON(with: request)
+        
         NetworkService.shared.loadData(with: request) { [weak self] (newsFeed: NewsFeed) in
-            guard let self = self else {
-                print("load data error.")
-                return
-            }
-            self.postFactory.setUp(self.tableView, with: newsFeed)
+            self?.viewModel.setUpAsync(with: newsFeed)
         }
     }
 }
@@ -42,27 +42,27 @@ class NewsViewController: UIViewController {
 extension NewsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return postFactory.heightForHeaderInSection(heightForHeaderInSection: section)
+        return viewModel.heightForHeaderInSection(heightForHeaderInSection: section)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return postFactory.viewForHeaderInSection(viewForHeaderInSection: section)
+        return viewModel.viewForHeaderInSection(viewForHeaderInSection: section)
     }
     
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return postFactory.heightForRowAt(heightForRowAt: indexPath)
+        return viewModel.heightForRowAt(heightForRowAt: indexPath)
     }
     
     
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return postFactory.heightForFooterInSection(heightForFooterInSection: section)
+        return viewModel.heightForFooterInSection(heightForFooterInSection: section)
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return postFactory.viewForFooterInSection(viewForFooterInSection: section)
+        return viewModel.viewForFooterInSection(viewForFooterInSection: section)
     }
     
 }
@@ -70,14 +70,14 @@ extension NewsViewController: UITableViewDelegate {
 extension NewsViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return postFactory.numberOfSections()
+        return viewModel.numberOfSections()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return postFactory.numberOfRowsInSection(section: section)
+        return viewModel.numberOfRowsInSection(section: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return postFactory.cellForRowAt(cellForRowAt: indexPath)
+        return viewModel.cellForRowAt(cellForRowAt: indexPath)
     }
 }

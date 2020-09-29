@@ -15,5 +15,5 @@ struct Repost: Codable {
     }
     
     let count: Int
-    let isUserReposted: Bool
+    let isUserReposted: Int
 }
