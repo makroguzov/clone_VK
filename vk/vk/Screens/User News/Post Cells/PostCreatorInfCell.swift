@@ -25,9 +25,14 @@ class PostCreatorInfCell: UITableViewCell {
         }
     }
     
-    
+
+    func setParams(image: String, name: String, subtitle: String) {
+        creatorImageView.sd_setImage(with: URL(string: image))
+        nameLable.text = name
+        subtitleLable.text = subtitle
+    }
     
     @objc private func settingsButtonAction(_ sender: UIButton) {
-        
+        return
     }
 }

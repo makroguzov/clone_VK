@@ -9,7 +9,6 @@
 import UIKit
 
 protocol CellReturnable {
-    var identifier: String { get set }
     var height: CGFloat { get set }
     
     func getCell(_ tableView: UITableView, by: Int) -> UITableViewCell

@@ -43,11 +43,7 @@ class NewsViewModel {
         let cell = model.getCell(tableView, by: row)
         return cell
     }
-    
-    private func getCellBy(_ identifier: String) {
         
-    }
-    
     func heightForRowAt(heightForRowAt indexPath: IndexPath) -> CGFloat {
         let section = indexPath.section
         let row = indexPath.row
