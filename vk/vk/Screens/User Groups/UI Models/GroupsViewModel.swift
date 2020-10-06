@@ -16,15 +16,35 @@ class GroupsViewModel {
     }
     
     private let tableView: UITableView
+    private var viewController: UIViewController
+    
+    private let groupsNetworkManager: GroupsNetworkManager
     
     private var cellGroupModels = [GroupCellModel]()
     private var cellGroupInvitationModels = [GroupInvitationCellModel]()
     
-    init(tableView: UITableView) {
+    init(_ controller: UIViewController ,tableView: UITableView) {
         self.tableView = tableView
+        self.viewController = controller
+        
+        self.groupsNetworkManager = GroupsNetworkManager(controller: controller)
     }
     
-    func setUp(with groups: UserGroupsModel) {
+    func loadData() {
+        groupsNetworkManager.loadData() { [weak self] (result) in
+            switch result {
+            case let .error(eror):
+                print(eror.localizedDescription)
+            case let .sucsess(groups, invitations):
+                self?.setUp(with: groups)
+                self?.setUp(with: invitations)
+                
+                self?.tableView.reloadData()
+            }
+        }
+    }
+    
+    private func setUp(with groups: UserGroupsModel) {
         let groups  = groups.groups
         
         for group in groups {
@@ -33,11 +53,10 @@ class GroupsViewModel {
         }
     }
     
-    func setUp(with invitations: UserGroupInvitationModel) {
+    private func setUp(with invitations: UserGroupInvitationModel) {
         for _ in 0..<2 {
             cellGroupInvitationModels.append(.emptyState)
         }
-        
     }
     
     func numberOfSections() -> Int {

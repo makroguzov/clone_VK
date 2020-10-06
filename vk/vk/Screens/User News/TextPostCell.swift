@@ -8,6 +8,6 @@
 
 import UIKit
 
-class TextPostTableViewCell: UITableViewCell {
+class TextPostCell: UITableViewCell {
     
 }

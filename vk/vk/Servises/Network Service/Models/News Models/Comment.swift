@@ -15,5 +15,5 @@ struct Comment: Codable {
     }
     
     let count: Int
-    let canPost: Bool
+    let canPost: Int
 }
