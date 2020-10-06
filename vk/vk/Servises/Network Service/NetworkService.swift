@@ -46,8 +46,8 @@ class NetworkService {
                     return
                 }
                 
-                let items = response["items"] //as? [String: Any]
-                print(items)
+                //let items = response["items"] //as? [String: Any]
+                print(response)
                 
             case let .failure(error):
                 print(error.localizedDescription)

@@ -21,7 +21,7 @@ struct PostCreatorInfCellModel: CellReturnable {
     
     func getCell(_ tableView: UITableView, by: Int) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostCreatorInfCell.identifier) as? PostCreatorInfCell else {
-            print("")
+            //print("qwe")
             fatalError()
         }
         
